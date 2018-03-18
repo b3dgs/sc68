@@ -13,14 +13,14 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-../api68 \
-../emu68 \
-../file68 \
-../io68 \
-../portaudio/src/common \
-../portaudio/src/hostapi/alsa \
-../portaudio/src/os/unix \
-../. \
-../unice68 \
-../zlib \
+api68 \
+emu68 \
+file68 \
+io68 \
+portaudio/src/common \
+portaudio/src/hostapi/alsa \
+portaudio/src/os/unix \
+. \
+unice68 \
+zlib \
 
