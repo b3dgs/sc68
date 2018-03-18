@@ -40,7 +40,7 @@
  @ingroup unix_src
 */
 
-#include "pa_hostapi.h"
+#include "../../common/pa_hostapi.h"
 
 PaError PaJack_Initialize( PaUtilHostApiRepresentation **hostApi, PaHostApiIndex index );
 PaError PaAlsa_Initialize( PaUtilHostApiRepresentation **hostApi, PaHostApiIndex index );
