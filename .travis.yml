@@ -21,4 +21,5 @@ addons:
 script:
   - export
   - cd Linux64
+  - make clean
   - make all
