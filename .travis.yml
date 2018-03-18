@@ -1,0 +1,24 @@
+language: c
+
+compiler:
+  - gcc
+
+env:
+  global:
+    - AUDIODEV=null
+
+install: true
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-6
+      - portaudio19-dev
+      - libasound2-dev
+
+script:
+  - export
+  - cd Linux64
+  - make all
