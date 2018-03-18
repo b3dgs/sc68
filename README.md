@@ -1,4 +1,5 @@
 # sc68
+[![Build Status](https://travis-ci.org/b3dgs/sc68.svg)](https://travis-ci.org/b3dgs/sc68)
 Special edition of SC68 dedicated to LionEngine sc68 module (https://github.com/b3dgs/lionengine).
 Only necessary code kept, provided with two Eclipse profiles (Windows + MinGW & Linux).
 
