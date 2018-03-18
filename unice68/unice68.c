@@ -24,7 +24,7 @@
 #include <stdarg.h>
 
 #define ICEVERSION  240
-#include "unice68/unice68.h"
+#include "unice68.h"
 
 static int verbose = 0;
 
