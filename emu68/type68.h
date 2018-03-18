@@ -18,7 +18,7 @@
 #ifndef _TYPE68_H_
 #define _TYPE68_H_
 
-#include <config_type68.h>
+#include "../config_type68.h"
 
 #ifdef __cplusplus
 extern "C" {

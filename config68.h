@@ -19,9 +19,9 @@
 # undef HAVE_CONFIG_CONFIG68_H
 #endif
 
-#include <config_package68.h>
-#include <config_option68.h>
-#include <config_type68.h>
-#include <config_platform68.h>
+#include "config_package68.h"
+#include "config_option68.h"
+#include "config_type68.h"
+#include "config_platform68.h"
 
 #endif /* #ifndef _SC68_CONFIG_H_ */
