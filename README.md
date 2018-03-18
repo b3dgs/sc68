@@ -5,7 +5,7 @@ Only necessary code kept, provided with two Eclipse profiles (Windows + MinGW & 
 PortAudio used for wave output (Winmm for Windows & ALSA for Linux).
 
 
-# Forked from SC68 (https://sourceforge.net/projects/sc68/)
+### Forked from SC68 (https://sourceforge.net/projects/sc68/)
                 sc68 - Atari ST and Amiga music player
                 **************************************
 
