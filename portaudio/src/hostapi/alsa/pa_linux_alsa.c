@@ -66,16 +66,16 @@
     #include <dlfcn.h> /* For dlXXX functions */
 #endif
 
-#include "portaudio.h"
-#include "pa_util.h"
-#include "pa_unix_util.h"
-#include "pa_allocation.h"
-#include "pa_hostapi.h"
-#include "pa_stream.h"
-#include "pa_cpuload.h"
-#include "pa_process.h"
-#include "pa_endianness.h"
-#include "pa_debugprint.h"
+#include "../../../include/portaudio.h"
+#include "../../common/pa_util.h"
+#include "../../os/unix/pa_unix_util.h"
+#include "../../common/pa_allocation.h"
+#include "../../common/pa_hostapi.h"
+#include "../../common/pa_stream.h"
+#include "../../common/pa_cpuload.h"
+#include "../../common/pa_process.h"
+#include "../../common/pa_endianness.h"
+#include "../../common/pa_debugprint.h"
 
 #include "pa_linux_alsa.h"
 

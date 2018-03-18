@@ -44,7 +44,7 @@
 #ifndef PA_UNIX_UTIL_H
 #define PA_UNIX_UTIL_H
 
-#include "pa_cpuload.h"
+#include "../../common/pa_cpuload.h"
 #include <assert.h>
 #include <pthread.h>
 #include <signal.h>
