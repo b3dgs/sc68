@@ -18,7 +18,7 @@
  *
  */ 
 
-#include <config_option68.h>
+#include "../config_option68.h"
 
 #define PAULA_CALCUL_TABLE 0
 

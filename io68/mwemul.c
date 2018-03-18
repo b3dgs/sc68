@@ -29,7 +29,7 @@
  */
 
 
-#include <config_option68.h>
+#include "../config_option68.h"
 
 #define MW_CALCUL_TABLE 0
 
