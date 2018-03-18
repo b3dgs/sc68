@@ -21,7 +21,7 @@
 #define ERROR68_MAXERROR    8
 #define ERROR68_MAXERRORSTR 256
 
-#include <config68.h>
+#include "../config68.h"
 
 #include <stdarg.h>
 #include <stdio.h>

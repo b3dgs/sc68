@@ -19,7 +19,7 @@
  */ 
  
 #include <stdlib.h>
-#include <config68.h>
+#include "../config68.h"
 #include "mfpemul.h"
 
 #define MFP_VECTOR_BASE ((mfp[0x17]>>4)<<6)

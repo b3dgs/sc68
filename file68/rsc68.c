@@ -18,7 +18,7 @@
  *
  */
 
-#include <config68.h>
+#include "../config68.h"
 
 #include <string.h>
 #include <stdlib.h>

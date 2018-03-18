@@ -20,7 +20,7 @@
 
 #include <stdio.h>//$$$
 
-#include <config68.h>
+#include "../config68.h"
 #include "ymemul.h"
 
 static u16 ymout[16*16*16] =

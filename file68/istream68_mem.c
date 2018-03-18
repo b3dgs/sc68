@@ -18,7 +18,7 @@
  *
  */
 
-#include <config68.h>
+#include "../config68.h"
 
 /* define this if you don't want MEM support. */
 #ifndef ISTREAM_NO_MEM

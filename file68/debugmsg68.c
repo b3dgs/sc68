@@ -20,7 +20,7 @@
 
 /* Copyright (C) 1998-2003 Benjamin Gerard */
 
-#include <config68.h>
+#include "../config68.h"
 #include "debugmsg68.h"
 
 static debugmsg68_t debug = 0;

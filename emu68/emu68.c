@@ -20,7 +20,7 @@
 
 /* Copyright (C) 1998-2001 Ben(jamin) Gerard */
 
-#include <config68.h>
+#include "../config68.h"
 
 #include <string.h>
                      
