@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-#include "emu68/struct68.h"
+#include "../emu68/struct68.h"
 
 /** EMU68 compatible IO plugin for MFP emulation. */
 extern io68_t mfp_io;

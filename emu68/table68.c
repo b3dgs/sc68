@@ -9,4 +9,4 @@
 
 /* Copyright (C) 1998-2001 Ben(jamin) Gerard */
 
-#include "emu68/table.inc"
+#include "table.inc"

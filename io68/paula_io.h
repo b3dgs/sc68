@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-#include "emu68/struct68.h"
+#include "../emu68/struct68.h"
 
 /** Paula IO plugin. */
 extern io68_t paula_io;

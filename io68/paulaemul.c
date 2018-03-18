@@ -27,7 +27,7 @@
 # include <stdio.h>
 #endif
 
-#include "io68/paulaemul.h"
+#include "paulaemul.h"
 
 #define CT_FIX       PAULA_CT_FIX
 #define PL_VOL_FIX   16

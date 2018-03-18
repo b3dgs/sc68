@@ -18,11 +18,11 @@
  *
  */
 
-#include "io68/paula_io.h"
-#include "io68/paulaemul.h"
+#include "paula_io.h"
+#include "paulaemul.h"
 
 #ifdef _DEBUG
-# include "file68/debugmsg68.h"
+# include "../file68/debugmsg68.h"
 #endif /*_DEBUG*/
 
 static void reload(paulav_t *v , const u8 * p);

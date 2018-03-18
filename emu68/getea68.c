@@ -9,9 +9,9 @@
 
 /* Copyright (C) 1998-2001 Ben(jamin) Gerard */
 
-#include "emu68/getea68.h"
-#include "emu68/error68.h"
-#include "emu68/mem68.h"
+#include "getea68.h"
+#include "error68.h"
+#include "mem68.h"
 
 extern reg68_t reg68;
 

@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-#include "emu68/struct68.h"
+#include "../emu68/struct68.h"
 
 #define TIMER_A   0   /**< MFP timer 'A' */
 #define TIMER_B   1   /**< MFP timer 'B' */

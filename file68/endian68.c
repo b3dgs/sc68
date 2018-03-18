@@ -18,7 +18,7 @@
  *
  */
 
-#include "file68/endian68.h"
+#include "endian68.h"
 
 int SC68byte_order(void)
 {

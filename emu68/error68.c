@@ -14,7 +14,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "emu68/error68.h"
+#include "error68.h"
 
 #define MAXERROR    4
 #define MAXERRORSTR 128

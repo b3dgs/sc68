@@ -9,6 +9,6 @@
  
 /* Copyright (C) 1998-2001 Ben(jamin) Gerard */
 
-#include "emu68/emu68.h"
-#include "emu68/lineA.inc"
+#include "emu68.h"
+#include "lineA.inc"
 

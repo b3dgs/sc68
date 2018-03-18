@@ -9,10 +9,10 @@
 
 /* Copyright (C) 1998-2001 Ben(jamin) Gerard */
 
-#include "emu68/inst68.h"
-#include "emu68/error68.h"
-#include "emu68/mem68.h"
-#include "emu68/macro68.h"
+#include "inst68.h"
+#include "error68.h"
+#include "mem68.h"
+#include "macro68.h"
 
 #ifndef EMU68_ASM_INST
 

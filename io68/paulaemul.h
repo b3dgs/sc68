@@ -65,7 +65,7 @@
 extern "C" {
 #endif
 
-#include "emu68/struct68.h"
+#include "../emu68/struct68.h"
 
 /** Amiga Vertical/Horizontal electron bean position */
 #define PAULA_VHPOSR    0x06

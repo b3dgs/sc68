@@ -17,15 +17,15 @@
 extern "C" {
 #endif
 
-#include "io68/ym_io.h"
-#include "io68/mw_io.h"
-#include "io68/shifter_io.h"
-#include "io68/mfp_io.h"
-#include "io68/paula_io.h"
-#include "io68/ymemul.h"
-#include "io68/mwemul.h"
-#include "io68/mfpemul.h"
-#include "io68/paulaemul.h"
+#include "ym_io.h"
+#include "mw_io.h"
+#include "shifter_io.h"
+#include "mfp_io.h"
+#include "paula_io.h"
+#include "ymemul.h"
+#include "mwemul.h"
+#include "mfpemul.h"
+#include "paulaemul.h"
 
 #ifdef __cplusplus
 }

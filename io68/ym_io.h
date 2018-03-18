@@ -13,7 +13,7 @@
 #ifndef _YM_IO_H_
 #define _YM_IO_H_
 
-#include "emu68/struct68.h"
+#include "../emu68/struct68.h"
 
 /** Yamaha-2149 emulator plugin. */
 extern io68_t ym_io;

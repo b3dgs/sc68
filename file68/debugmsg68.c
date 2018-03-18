@@ -21,7 +21,7 @@
 /* Copyright (C) 1998-2003 Benjamin Gerard */
 
 #include <config68.h>
-#include "file68/debugmsg68.h"
+#include "debugmsg68.h"
 
 static debugmsg68_t debug = 0;
 static void * debug_cookie = 0;

@@ -22,20 +22,20 @@
 
 #include <string.h>
 
-#include "api68/api68.h"
-#include "api68/mixer68.h"
-#include "api68/conf68.h"
-#include "emu68/emu68.h"
-#include "file68/error68.h"
-#include "file68/string68.h"
-#include "file68/alloc68.h"
-#include "file68/file68.h"
-#include "file68/rsc68.h"
-#include "file68/debugmsg68.h"
+#include "api68.h"
+#include "mixer68.h"
+#include "conf68.h"
+#include "../emu68/emu68.h"
+#include "../file68/error68.h"
+#include "../file68/string68.h"
+#include "../file68/alloc68.h"
+#include "../file68/file68.h"
+#include "../file68/rsc68.h"
+#include "../file68/debugmsg68.h"
 
-#include "emu68/emu68.h"
-#include "emu68/ioplug68.h"
-#include "io68/io68.h"
+#include "../emu68/emu68.h"
+#include "../emu68/ioplug68.h"
+#include "../io68/io68.h"
 
 #define TRAP_14_ADDR 0x600
 /* ST xbios function emulator.#

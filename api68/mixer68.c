@@ -19,7 +19,7 @@
  */
 
 #include <config68.h>
-#include "api68/mixer68.h"
+#include "mixer68.h"
 
 /* ARM compliant version */
 /* #define SWAP_16BITWORD(V) ((V^=V<<16), (V^=V>>16), (V^=V<<16)) */

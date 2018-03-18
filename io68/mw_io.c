@@ -18,8 +18,8 @@
  *
  */
 
-#include "io68/mw_io.h"
-#include "io68/mwemul.h"
+#include "mw_io.h"
+#include "mwemul.h"
 
 static u32 mw_readB(u32 addr, cycle68_t cycle)
 {

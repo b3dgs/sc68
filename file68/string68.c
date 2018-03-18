@@ -18,8 +18,8 @@
  *
  */
 
-#include "file68/string68.h"
-#include "file68/alloc68.h"
+#include "string68.h"
+#include "alloc68.h"
  
 #include <stdio.h>
 #include <string.h>

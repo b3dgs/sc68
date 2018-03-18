@@ -23,11 +23,11 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "api68/conf68.h"
-#include "file68/error68.h"
-#include "file68/rsc68.h"
-#include "file68/string68.h"
-#include "file68/debugmsg68.h"
+#include "conf68.h"
+#include "../file68/error68.h"
+#include "../file68/rsc68.h"
+#include "../file68/string68.h"
+#include "../file68/debugmsg68.h"
 
 /* Defines for the config default values. */
 

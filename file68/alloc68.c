@@ -18,8 +18,8 @@
  *
  */
 
-#include "file68/alloc68.h"
-#include "file68/error68.h"
+#include "alloc68.h"
+#include "error68.h"
 
 static sc68_alloc_t sc68_alloc;
 static sc68_free_t sc68_free;

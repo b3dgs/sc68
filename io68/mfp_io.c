@@ -18,8 +18,8 @@
  *
  */
 
-#include "io68/mfp_io.h"
-#include "io68/mfpemul.h"
+#include "mfp_io.h"
+#include "mfpemul.h"
 
 /* 0  GPIP   General purpose I/O */
 static u8 mfpr_01(cycle68_t cycle) { cycle=cycle; return mfp[0x01]; }

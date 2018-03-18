@@ -13,7 +13,7 @@
 #ifndef _MW_IO_H_
 #define _MW_IO_H_
 
-#include "emu68/struct68.h"
+#include "../emu68/struct68.h"
 
 #ifdef __cplusplus
 extern "C" {

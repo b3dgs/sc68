@@ -16,8 +16,8 @@ extern "C" {
 #endif
 
   //#include "config.h"
-#include "file68/istream68.h"
-#include "file68/debugmsg68.h"
+#include "../file68/istream68.h"
+#include "../file68/debugmsg68.h"
 
 /** @defgroup  api68_api  sc68 main API
  *  @ingroup   api68_devel

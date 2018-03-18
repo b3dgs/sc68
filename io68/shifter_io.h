@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-#include "emu68/struct68.h"
+#include "../emu68/struct68.h"
 
 /** EMU68 compatible plugin for Atari-ST shifter emulation.
  *

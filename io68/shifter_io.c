@@ -18,9 +18,9 @@
  *
  */
 
-#include "emu68/struct68.h"
+#include "../emu68/struct68.h"
 #if _DEBUG
-# include "file68/debugmsg68.h"
+# include "../file68/debugmsg68.h"
 #endif /*_DEBUG*/
 
 static u8 shifter_0a = 0xfe;

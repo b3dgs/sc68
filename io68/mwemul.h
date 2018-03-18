@@ -17,7 +17,7 @@
 extern "C" {
 #endif
 
-#include "emu68/type68.h"
+#include "../emu68/type68.h"
 
 /** @name  Micro-Wire registers.
  *  @{

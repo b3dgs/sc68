@@ -18,8 +18,8 @@
  *
  */ 
 
-#include "io68/ym_io.h"
-#include "io68/ymemul.h"
+#include "ym_io.h"
+#include "ymemul.h"
 
 static u32 ym_readB(u32 addr, cycle68_t cycle)
 {

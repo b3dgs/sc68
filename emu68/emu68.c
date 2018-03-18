@@ -24,7 +24,7 @@
 
 #include <string.h>
                      
-#include "emu68/emu68.h"
+#include "emu68.h"
 
 /*************************************************************
 * Pointer to unique interruping IO (MFP for ST emulation!!!) *

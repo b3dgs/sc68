@@ -47,7 +47,7 @@
 #ifndef _MEM68_H_
 #define _MEM68_H_
 
-#include "emu68/struct68.h"
+#include "struct68.h"
 
 #ifdef __cplusplus
 extern "C" {

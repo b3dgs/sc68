@@ -15,7 +15,7 @@
 extern "C" {
 #endif
 
-#include "file68/istream68.h"
+#include "istream68.h"
 
 /** Test ice file header magic header.
  *

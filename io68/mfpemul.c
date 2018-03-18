@@ -20,7 +20,7 @@
  
 #include <stdlib.h>
 #include <config68.h>
-#include "io68/mfpemul.h"
+#include "mfpemul.h"
 
 #define MFP_VECTOR_BASE ((mfp[0x17]>>4)<<6)
 #define SEI             ((mfp[0x17]&8))

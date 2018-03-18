@@ -22,16 +22,16 @@
 
 #include <string.h>
 
-#include "emu68/type68.h"
-#include "file68/file68.h"
-#include "file68/error68.h"
-#include "file68/alloc68.h"
-#include "file68/debugmsg68.h"
+#include "../emu68/type68.h"
+#include "file68.h"
+#include "error68.h"
+#include "alloc68.h"
+#include "debugmsg68.h"
 
-#include "file68/istream68_file.h"
-#include "file68/istream68_mem.h"
-#include "file68/gzip68.h"
-#include "file68/ice68.h"
+#include "istream68_file.h"
+#include "istream68_mem.h"
+#include "gzip68.h"
+#include "ice68.h"
 
 /* SC68 file identifier string
  */

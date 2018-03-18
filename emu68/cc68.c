@@ -9,9 +9,9 @@
 
 /* Copyright (C) 1998-2001 Ben(jamin) Gerard */
  
-#include "emu68/struct68.h"
-#include "emu68/srdef68.h"
-#include "emu68/cc68.h"
+#include "struct68.h"
+#include "srdef68.h"
+#include "cc68.h"
 
 extern reg68_t reg68;
 

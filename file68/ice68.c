@@ -19,12 +19,12 @@
  */
 
 #include <string.h>
-#include "file68/ice68.h"
-#include "file68/debugmsg68.h"
-#include "file68/error68.h"
-#include "file68/alloc68.h"
-#include "file68/istream68_file.h"
-#include "unice68/unice68.h"
+#include "ice68.h"
+#include "debugmsg68.h"
+#include "error68.h"
+#include "alloc68.h"
+#include "istream68_file.h"
+#include "../unice68/unice68.h"
 
 int ice_is_magic(const void * buffer)
 {

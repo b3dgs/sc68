@@ -18,7 +18,7 @@
  *
  */
 
-#include "file68/istream68_def.h"
+#include "istream68_def.h"
 
 const char * istream_filename(istream_t * istream)
 {

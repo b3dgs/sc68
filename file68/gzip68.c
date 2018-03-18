@@ -51,9 +51,9 @@ int gzip_is_magic(const void * buffer)
 # include <unistd.h>
 #endif
 
-#include "file68/gzip68.h"
-#include "file68/error68.h"
-#include "file68/alloc68.h"
+#include "gzip68.h"
+#include "error68.h"
+#include "alloc68.h"
 
 static int is_gz(int fd, int len)
 {

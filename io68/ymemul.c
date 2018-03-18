@@ -21,10 +21,10 @@
 #include <stdio.h>//$$$
 
 #include <config68.h>
-#include "io68/ymemul.h"
+#include "ymemul.h"
 
 static u16 ymout[16*16*16] =
-#include "io68/ym_fixed_vol.h"
+#include "ym_fixed_vol.h"
 
 #define YM_MASTER_FRQ  2000000  /**< YM master frequency in Atari ST:2Mhz */
 #define YM_FRQ         250000   /**< Max frequency involved (for envelop) */

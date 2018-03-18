@@ -16,7 +16,7 @@
 #ifndef _ISTREAM68_FD_H_
 #define _ISTREAM68_FD_H_
 
-#include "file68/istream68.h"
+#include "istream68.h"
 
 #ifdef __cplusplus
 extern "C" {

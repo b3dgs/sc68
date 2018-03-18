@@ -27,7 +27,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "file68/error68.h"
+#include "error68.h"
 
 static char err[ERROR68_MAXERROR][ERROR68_MAXERRORSTR];
 static int nerr = 0;

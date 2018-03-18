@@ -20,7 +20,7 @@
 #ifndef _INST68_H_
 #define _INST68_H_
 
-#include "emu68/type68.h"
+#include "type68.h"
 
 #ifdef __cplusplus
 extern "C" {

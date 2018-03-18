@@ -26,9 +26,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "file68/istream68_mem.h"
-#include "file68/istream68_def.h"
-#include "file68/alloc68.h"
+#include "istream68_mem.h"
+#include "istream68_def.h"
+#include "alloc68.h"
 
 /** istream file structure. */
 typedef struct {

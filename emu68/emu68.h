@@ -12,13 +12,13 @@
 #ifndef _EMU68_H_
 #define _EMU68_H_
 
-#include "emu68/struct68.h"
-#include "emu68/getea68.h"
-#include "emu68/macro68.h"
-#include "emu68/error68.h"
-#include "emu68/cc68.h"
-#include "emu68/inst68.h"
-#include "emu68/mem68.h"
+#include "struct68.h"
+#include "getea68.h"
+#include "macro68.h"
+#include "error68.h"
+#include "cc68.h"
+#include "inst68.h"
+#include "mem68.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -18,8 +18,8 @@
 #ifndef _MACRO68_H_
 #define _MACRO68_H_
 
-#include "emu68/srdef68.h"
-#include "emu68/excep68.h"
+#include "srdef68.h"
+#include "excep68.h"
 
 #ifdef __cplusplus
 extern "C" {

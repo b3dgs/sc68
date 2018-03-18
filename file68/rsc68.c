@@ -23,12 +23,12 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "file68/error68.h"
-#include "file68/rsc68.h"
-#include "file68/string68.h"
-#include "file68/alloc68.h"
-#include "file68/istream68_file.h"
-#include "file68/debugmsg68.h"
+#include "error68.h"
+#include "rsc68.h"
+#include "string68.h"
+#include "alloc68.h"
+#include "istream68_file.h"
+#include "debugmsg68.h"
 
 static const char * default_share_path = "";
 static const char * share_path = 0;

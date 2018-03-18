@@ -9,7 +9,7 @@
 
 /* Copyright (C) 1998-2001 Ben(jamin) Gerard */
 
-#include "emu68/mem68.h"
+#include "mem68.h"
 
 extern reg68_t reg68;
 
