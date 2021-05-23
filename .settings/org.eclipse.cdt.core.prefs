@@ -1,6 +1,11 @@
 eclipse.preferences.version=1
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.release.1106996315.550538713/append=true
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.release.1106996315.550538713/appendContributed=true
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.release.1106996315.704218644.1415494799.1450144047.175553074.1035332907/PATH/delimiter=\:
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.release.1106996315.704218644.1415494799.1450144047.175553074.1035332907/PATH/operation=append
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.release.1106996315.704218644.1415494799.1450144047.175553074.1035332907/PATH/value=/home/djthunder/android-ndk-r21e/toolchains/llvm/prebuilt/linux-x86_64/bin
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.release.1106996315.704218644.1415494799.1450144047.175553074.1035332907/append=true
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.release.1106996315.704218644.1415494799.1450144047.175553074.1035332907/appendContributed=true
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.release.1106996315/PATH/delimiter=;
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.release.1106996315/PATH/operation=replace
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.release.1106996315/PATH/value=${MINGW_HOME}\\bin;${MSYS_HOME}\\bin;C\:\\MinGW\\msys\\1.0\\bin

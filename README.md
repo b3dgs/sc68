@@ -1,17 +1,6 @@
 # sc68
 [![Build Status](https://travis-ci.org/b3dgs/sc68.svg)](https://travis-ci.org/b3dgs/sc68) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-Special edition of SC68 dedicated to LionEngine sc68 module (https://github.com/b3dgs/lionengine).
+SC68 used for emulation routine : https://sourceforge.net/projects/sc68/
 
-Only necessary code kept, provided with two Eclipse profiles (Windows + MinGW & Linux).
-
-PortAudio used for wave output (Winmm for Windows & ALSA for Linux).
-
-## Forked from SC68 (https://sourceforge.net/projects/sc68/)
-                sc68 - Atari ST and Amiga music player
-                **************************************
-
-               Copyright (C) 1998-2003  Benjamin Gerard
-                          <ben@sashipa.com>
-                  <http://sashipa.ben.free.fr/sc68/>
-               <http://sourceforge.net/projects/sc68/>
+PortAudio used for PCM output (WINMM for Windows, ALSA for Linux, OpenSLES for Android) : https://github.com/Gundersanne/portaudio_opensles

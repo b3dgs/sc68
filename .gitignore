@@ -27,4 +27,6 @@
 *.out
 *.app
 
-.project
+/Linux Exe/
+/Android/
+/Linux64 Exe Debug/
