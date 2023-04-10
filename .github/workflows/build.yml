@@ -36,6 +36,7 @@ jobs:
     - name: linux-x86_64
       run: |
         export DIST=x86_64-pc-linux-gnu
+        mkdir libs/_compiled/$DIST
         cd libs/sc68-svn/_build
         mkdir $DIST
         cd $DIST
