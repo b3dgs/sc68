@@ -16,9 +16,6 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Cache
-      uses: actions/cache@v3.3.1
-
     - name: Prepare
       run: |
         sudo apt-get update
