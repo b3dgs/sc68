@@ -41,10 +41,10 @@ jobs:
         cd $DIST
         mkdir as68
         cd as68
-        ../../../sc68-svn/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        ../../sc68-svn/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
         make
         cd ..
-        ../../sc68-svn/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        ../sc68-svn/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
         make
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
@@ -59,10 +59,10 @@ jobs:
         cd $DIST
         mkdir as68
         cd as68
-        ../../../sc68-svn/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        ../../sc68-svn/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
         make
         cd ..
-        ../../sc68-svn/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        ../sc68-svn/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
         make
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
@@ -77,10 +77,10 @@ jobs:
         cd $DIST
         mkdir as68
         cd as68
-        ../../../sc68-svn/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        ../../sc68-svn/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
         make
         cd ..
-        ../../sc68-svn/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        ../sc68-svn/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
         make
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
