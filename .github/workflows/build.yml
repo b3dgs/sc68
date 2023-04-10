@@ -27,7 +27,9 @@ jobs:
         mkdir libs/_compiled
         mkdir libs/sc68-svn
         mkdir libs/sc68-svn/_build
-        cd libs/sc68-svn
+        cd libs
+        git clone https://github.com/madler/zlib.git
+        cd sc68-svn
         svn checkout http://svn.code.sf.net/p/sc68/code/ sc68
         cd sc68
         ./tools/svn-bootstrap.sh
@@ -54,8 +56,15 @@ jobs:
 
     - name: win32-x86
       run: |
-        export DIST=x86_64-w64-mingw32
-        cd libs/sc68-svn/_build
+        export DIST=i686-w64-mingw32
+        cd libs
+        cd zlib
+        mkdir $DIST
+        cd $DIST
+        ../configure --prefix=$DIST --static
+        make
+        cd ../..
+        cd sc68-svn/_build
         mkdir $DIST
         cd $DIST
         mkdir as68
@@ -63,7 +72,7 @@ jobs:
         ../../../sc68/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
         make
         cd ..
-        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC LDFLAGS="-L../../../zlib/$DIST/"
         make
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
@@ -72,8 +81,15 @@ jobs:
 
     - name: win32-x86_64
       run: |
-        export DIST=i686-w64-mingw32
-        cd libs/sc68-svn/_build
+        export DIST=x86_64-w64-mingw32
+        cd libs
+        cd zlib
+        mkdir $DIST
+        cd $DIST
+        ../configure --prefix=$DIST --static
+        make
+        cd ../..
+        cd sc68-svn/_build
         mkdir $DIST
         cd $DIST
         mkdir as68
@@ -81,7 +97,7 @@ jobs:
         ../../../sc68/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
         make
         cd ..
-        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC LDFLAGS="-L../../../zlib/$DIST/"
         make
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
