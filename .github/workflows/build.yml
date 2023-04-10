@@ -58,6 +58,7 @@ jobs:
     - name: win32-x86_64
       run: |
         export DIST=x86_64-w64-mingw32
+        mkdir libs/_compiled/$DIST
         cd libs
         cd zlib
         mkdir build
@@ -86,6 +87,7 @@ jobs:
     - name: win32-x86
       run: |
         export DIST=i686-w64-mingw32
+        mkdir libs/_compiled/$DIST
         cd libs
         cd zlib
         mkdir build
