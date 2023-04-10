@@ -34,7 +34,6 @@ jobs:
         cd $DIST
         mkdir as68
         cd as68
-        make clean
         ../../../sc68-svn/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
         make
         cd ..
@@ -52,7 +51,6 @@ jobs:
         cd $DIST
         mkdir as68
         cd as68
-        make clean
         ../../../sc68-svn/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
         make
         cd ..
@@ -70,7 +68,6 @@ jobs:
         cd $DIST
         mkdir as68
         cd as68
-        make clean
         ../../../sc68-svn/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
         make
         cd ..
