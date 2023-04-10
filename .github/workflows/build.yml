@@ -19,7 +19,7 @@ jobs:
     - name: Prepare
       run: |
         sudo apt-get update
-        sudo apt-get install build-essential alsa-tools libasound2-dev alsa-utils alsa-oss pavucontrol autoconf automake libtool pkg-config libao-dev libao-common zlib zlib-dev android-tools-adb android-tools-fastboot subversion mingw-w64 gawk mawk sysroot libpulse-dev esd-config libcurl4 pulseaudio pulseaudio-utils cmake gcc-multilib g++-multilib musl musl-tools libsdl2-mixer-2.0-0 libsdl2-mixer-dev
+        sudo apt-get install build-essential alsa-tools libasound2-dev alsa-utils alsa-oss pavucontrol autoconf automake libtool pkg-config libao-dev libao-common android-tools-adb android-tools-fastboot subversion mingw-w64 gawk mawk libpulse-dev libcurl4 pulseaudio pulseaudio-utils cmake gcc-multilib g++-multilib musl musl-tools libsdl2-mixer-2.0-0 libsdl2-mixer-dev
         mkdir libs
         mkdir libs/_compiled
         mkdir libs/sc68
