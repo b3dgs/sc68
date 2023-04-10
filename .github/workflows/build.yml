@@ -46,6 +46,8 @@ jobs:
         cd $DIST
         ../../configure --prefix=$DIST --static
         make
+        pwd
+        dir
         cd ../../../sc68-svn/_build
         mkdir $DIST
         cd $DIST
@@ -54,7 +56,7 @@ jobs:
         ../../../sc68/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
         make
         cd ..
-        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC LDFLAGS="-L~/zlib/build/$DIST/"
+        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC LDFLAGS="-L../../../zlib/build/$DIST/"
         make
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
@@ -80,7 +82,7 @@ jobs:
         ../../../sc68/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
         make
         cd ..
-        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC LDFLAGS="-L~/zlib/build/$DIST/"
+        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC LDFLAGS="-L../../../zlib/build/$DIST/"
         make
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
