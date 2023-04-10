@@ -67,8 +67,6 @@ jobs:
         cd $DIST
         ../../configure --prefix=$DIST --static
         make
-        pwd
-        dir
         cd ../../../sc68-svn/_build
         mkdir $DIST
         cd $DIST
