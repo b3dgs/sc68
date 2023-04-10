@@ -1,0 +1,84 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 0
+
+    - name: Cache
+      uses: actions/cache@v3.3.1
+
+    - name: Prepare
+      run: |
+        sudo apt-get update
+        sudo apt-get install build-essential alsa-tools libasound2-dev alsa-utils alsa-oss pavucontrol autoconf automake libtool pkg-config libao-dev libao-common zlib zlib-dev android-tools-adb android-tools-fastboot subversion mingw-w64 gawk mawk sysroot libpulse-dev esd-config libcurl4 pulseaudio pulseaudio-utils cmake gcc-multilib g++-multilib musl musl-tools libsdl2-mixer-2.0-0 libsdl2-mixer-dev
+        mkdir libs
+        mkdir libs/_compiled
+        mkdir libs/sc68
+        mkdir libs/sc68/_build
+        svn checkout http://svn.code.sf.net/p/sc68/code/ libs/sc68/_build/sc68-svn
+
+    - name: linux-x86_64
+      run: |
+        export DIST=x86_64-pc-linux-gnu
+        cd libs/sc68/_build
+        mkdir $DIST
+        cd $DIST
+        mkdir as68
+        cd as68
+        make clean
+        ../../../sc68-svn/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        make
+        cd ..
+        ../../sc68-svn/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        make
+        cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
+        cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
+        cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
+
+    - name: win32-x86
+      run: |
+        export DIST=x86_64-w64-mingw32
+        cd libs/sc68/_build
+        mkdir $DIST
+        cd $DIST
+        mkdir as68
+        cd as68
+        make clean
+        ../../../sc68-svn/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        make
+        cd ..
+        ../../sc68-svn/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        make
+        cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
+        cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
+        cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
+
+    - name: win32-x86_64
+      run: |
+        export DIST=i686-w64-mingw32
+        cd libs/sc68/_build
+        mkdir $DIST
+        cd $DIST
+        mkdir as68
+        cd as68
+        make clean
+        ../../../sc68-svn/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        make
+        cd ..
+        ../../sc68-svn/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        make
+        cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
+        cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
+        cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
