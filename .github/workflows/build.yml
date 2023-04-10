@@ -24,7 +24,7 @@ jobs:
         mkdir libs/_compiled
         mkdir libs/sc68
         mkdir libs/sc68/_build
-        svn checkout http://svn.code.sf.net/p/sc68/code/ libs/sc68/_build/sc68-svn
+        svn checkout http://svn.code.sf.net/p/sc68/code/ libs/sc68/sc68-svn
 
     - name: linux-x86_64
       run: |
