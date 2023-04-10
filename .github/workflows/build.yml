@@ -16,19 +16,26 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Prepare
+    - name: Dependencies
       run: |
         sudo apt-get update
         sudo apt-get install build-essential alsa-tools libasound2-dev alsa-utils alsa-oss pavucontrol autoconf automake libtool pkg-config libao-dev libao-common android-tools-adb android-tools-fastboot subversion mingw-w64 gawk mawk libpulse-dev libcurl4 pulseaudio pulseaudio-utils cmake gcc-multilib g++-multilib musl musl-tools libsdl2-mixer-2.0-0 libsdl2-mixer-dev
+      shell: sh
+
+    - name: sc68-svn
+      run: |
         mkdir libs
         mkdir libs/_compiled
         mkdir libs/sc68
         mkdir libs/sc68/_build
+        ls
         svn checkout http://svn.code.sf.net/p/sc68/code/ libs/sc68/sc68-svn
+      shell: sh
 
     - name: linux-x86_64
       run: |
         export DIST=x86_64-pc-linux-gnu
+        ls
         cd libs/sc68/_build
         mkdir $DIST
         cd $DIST
@@ -42,6 +49,7 @@ jobs:
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
+      shell: sh
 
     - name: win32-x86
       run: |
@@ -59,6 +67,7 @@ jobs:
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
+      shell: sh
 
     - name: win32-x86_64
       run: |
@@ -76,3 +85,4 @@ jobs:
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
+      shell: sh
