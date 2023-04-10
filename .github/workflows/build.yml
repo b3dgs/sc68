@@ -54,16 +54,16 @@ jobs:
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
       shell: sh
 
-    - name: win32-x86
+    - name: win32-x86_64
       run: |
-        export DIST=i686-w64-mingw32
+        export DIST=x86_64-w64-mingw32
         cd libs
         cd zlib
         mkdir $DIST
         cd $DIST
-        ../configure --prefix=$DIST --static
+        ../../configure --prefix=$DIST --static
         make
-        cd ../..
+        cd ../../..
         cd sc68-svn/_build
         mkdir $DIST
         cd $DIST
@@ -79,16 +79,16 @@ jobs:
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
       shell: sh
 
-    - name: win32-x86_64
+    - name: win32-x86
       run: |
-        export DIST=x86_64-w64-mingw32
+        export DIST=i686-w64-mingw32
         cd libs
         cd zlib
         mkdir $DIST
         cd $DIST
-        ../configure --prefix=$DIST --static
+        ../../configure --prefix=$DIST --static
         make
-        cd ../..
+        cd ../../..
         cd sc68-svn/_build
         mkdir $DIST
         cd $DIST
