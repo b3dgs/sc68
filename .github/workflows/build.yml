@@ -271,7 +271,8 @@ jobs:
 
     - name: Dependencies
       run: |
-        brew install autoconf automake gawk mawk alsa-lib
+        brew install autoconf automake gawk mawk mas
+        mas install 497799835
 
     - name: libs
       run: |
@@ -323,7 +324,7 @@ jobs:
         mkdir bin/$DIST
         cd bin/$DIST
         $DST_GCC -std=c99 $DST_INCLUDES -O3 -c -fPIC ../../$DST_NAME.c
-        $DST_GCC -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME.o -Wl $DST_LIBS -lportaudio -Wl -pthread -lm -lz -lalsa
+        $DST_GCC -framework CoreAudio -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME.o -Wl $DST_LIBS -lportaudio -Wl -pthread -lm -lz
         cd ../..
         mkdir output/darwin-x86-64
         ls bin/$DIST/
