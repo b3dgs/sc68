@@ -28,9 +28,6 @@ jobs:
         ndk-version: r25c
         add-to-path: true
         local-cache: true
-    - run: ./build.sh
-      env:
-        ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
     - name: sc68-svn
       run: |
@@ -82,6 +79,8 @@ jobs:
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
+      env:
+        ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
     - name: armeabi-v7a
       run: |
@@ -101,6 +100,8 @@ jobs:
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
+      env:
+        ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
     - name: win32-x86_64
       run: |
