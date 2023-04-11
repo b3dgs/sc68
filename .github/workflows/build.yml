@@ -310,11 +310,11 @@ jobs:
         cd $DIST
         mkdir as68
         cd as68
-        ../../../sc68/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        ../../../sc68/as68/configure --without-ao --enable-static --disable-shared CFLAGS=-fPIC
         make
         make install
         cd ..
-        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared --disable-mac-universal CC=clang CFLAGS=-fPIC
+        ../../sc68/configure --without-ao --enable-static --disable-shared --disable-mac-universal CC=clang CFLAGS=-fPIC
         make
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
@@ -322,16 +322,15 @@ jobs:
         cd ../../..
         mkdir portaudio/_build/$DIST
         cd portaudio/_build/$DIST
-        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared --disable-mac-universal CC=clang CFLAGS=-fPIC
+        ../../portaudio_opensles/configure --enable-static --disable-shared --disable-mac-universal CC=clang CFLAGS=-fPIC
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
-        ls ../../../_compiled/$DIST/**
         cd ../../../..
         mkdir bin
         mkdir bin/$DIST
         cd bin/$DIST
         $DST_GCC -dynamiclib -std=c99 $DST_INCLUDES -O3 -c -fPIC ../../$DST_NAME.c
-        $DST_GCC -framework CoreAudio -L$DST_LIBS_DIR/_compiled/$DIST -dynamiclib -o lib$DST_NAME.dylib $DST_NAME.o -Wl $DST_LIBS -lportaudio -Wl -pthread -lm -lz
+        $DST_GCC -framework CoreAudio -L$DST_LIBS_DIR/_compiled/$DIST -o lib$DST_NAME.dylib $DST_NAME.o -Wl -lcurl $DST_LIBS -lportaudio -pthread -lm -lz
         cd ../..
         mkdir output/darwin-x86-64
         ls bin/$DIST/
