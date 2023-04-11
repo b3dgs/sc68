@@ -51,7 +51,7 @@ jobs:
         DIST=x86_64-pc-linux-gnu
         DST_NAME=sc68_player
         DST_GCC=gcc
-        DST_LIBS_DIR=~/libs
+        DST_LIBS_DIR=$(pwd)/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
         DST_LIBS="-lsc68 -lfile68 -lunice68"
         mkdir libs/_compiled/$DIST
@@ -87,7 +87,7 @@ jobs:
         DIST=aarch64-linux-androideabi22
         DST_NAME=sc68_player
         DST_GCC=aarch64-linux-android22-clang
-        DST_LIBS_DIR=~/libs
+        DST_LIBS_DIR=$(pwd)/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
         DST_LIBS="-lsc68 -lfile68 -lunice68"
         TOOLCHAIN=${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin
@@ -127,7 +127,7 @@ jobs:
         DIST=armv7a-linux-androideabi22
         DST_NAME=sc68_player
         DST_GCC=armv7a-linux-androideabi22-clang
-        DST_LIBS_DIR=~/libs
+        DST_LIBS_DIR=$(pwd)/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
         DST_LIBS="-lsc68 -lfile68 -lunice68"
         export TOOLCHAIN=${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin
@@ -167,7 +167,7 @@ jobs:
         DIST=x86_64-w64-mingw32
         DST_NAME=sc68_player
         DST_GCC=x86_64-w64-mingw32-gcc
-        DST_LIBS_DIR=~/libs
+        DST_LIBS_DIR=$(pwd)/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
         DST_LIBS="-lsc68 -lfile68 -lunice68"
         mkdir libs/_compiled/$DIST
@@ -209,7 +209,7 @@ jobs:
         DIST=i686-w64-mingw32
         DST_NAME=sc68_player
         DST_GCC=i686-w64-mingw32-gcc
-        DST_LIBS_DIR=~/libs
+        DST_LIBS_DIR=$(pwd)/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
         DST_LIBS="-lsc68 -lfile68 -lunice68"
         mkdir libs/_compiled/$DIST
@@ -276,7 +276,7 @@ jobs:
         DIST=x86_64-apple-darwin11
         DST_NAME=sc68_player
         DST_GCC=gcc
-        DST_LIBS_DIR=~/libs
+        DST_LIBS_DIR=$(pwd)/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
         DST_LIBS="-lsc68 -lfile68 -lunice68"
         mkdir libs/_compiled/$DIST
