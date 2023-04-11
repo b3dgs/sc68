@@ -165,10 +165,6 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Dependencies
-      run: |
-        brew install alsa-tools libasound2-dev alsa-utils alsa-oss pavucontrol autoconf automake libtool pkg-config libao-dev libao-common subversion gawk mawk libpulse-dev libcurl4 pulseaudio pulseaudio-utils cmake gcc-multilib g++-multilib musl musl-tools libsdl2-mixer-2.0-0 libsdl2-mixer-dev
-
     - name: sc68-svn
       run: |
         mkdir libs
