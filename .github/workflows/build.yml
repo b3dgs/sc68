@@ -50,7 +50,6 @@ jobs:
       run: |
         export DIST=x86_64-pc-linux-gnu
         export NAME=sc68_player
-        export GCC=gcc
         export LIBS_DIR=~/libs/_compiled/$DIST
         export INCLUDES="-I$LIBS_DIR/portaudio/src/include -I$LIBS_DIR/sc68-svn/sc68/file68 -I$LIBS_DIR/sc68-svn/sc68/libsc68"
         export LIBS="-lsc68 -lfile68 -lunice68"
@@ -78,15 +77,14 @@ jobs:
         cd ../../../..
         mkdir bin
         cd bin
-        $GCC -std=c99 $INCLUDES -O3 -c -fPIC ../../$NAME.c
-        $GCC -s -L$LIBS_DIR/_compiled/$DIST -shared -o lib$NAME.so $NAME.o -Wl,-Bstatic $LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
+        gcc -std=c99 $INCLUDES -O3 -c -fPIC ../../$NAME.c
+        gcc -s -L$LIBS_DIR/_compiled/$DIST -shared -o lib$NAME.so $NAME.o -Wl,-Bstatic $LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
 
     - name: arm64-v8a
       run: |
         export DIST=aarch64-linux-androideabi22
         export LIBS_DIR=~/libs/_compiled/$DIST
         export NAME=sc68_player
-        export GCC=aarch64-linux-android22-clang
         export INCLUDES="-I$LIBS_DIR/portaudio/src/include -I$LIBS_DIR/sc68-svn/sc68/file68 -I$LIBS_DIR/sc68-svn/sc68/libsc68"
         export LIBS="-lsc68 -lfile68 -lunice68"
         export TOOLCHAIN=${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin
@@ -114,8 +112,8 @@ jobs:
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
         cd ../../../../bin
-        $GCC -std=c99 -I${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include $INCLUDES -O3 -c -fPIC ../../$NAME.c
-        $GCC -s -L$LIBS_DIR/_compiled/$DIST -shared -o lib$NAME.so $NAME.o -Wl,-Bstatic $LIBS -lportaudio -Wl,-Bdynamic -lm -lz -lOpenSLES
+        aarch64-linux-android22-clang -std=c99 -I${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include $INCLUDES -O3 -c -fPIC ../../$NAME.c
+        aarch64-linux-android22-clang -s -L$LIBS_DIR/_compiled/$DIST -shared -o lib$NAME.so $NAME.o -Wl,-Bstatic $LIBS -lportaudio -Wl,-Bdynamic -lm -lz -lOpenSLES
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
@@ -124,7 +122,6 @@ jobs:
         export DIST=armv7a-linux-androideabi22
         export LIBS_DIR=~/libs/_compiled/$DIST
         export NAME=sc68_player
-        export GCC=armv7a-linux-androideabi22-clang
         export INCLUDES="-I$LIBS_DIR/portaudio/src/include -I$LIBS_DIR/sc68-svn/sc68/file68 -I$LIBS_DIR/sc68-svn/sc68/libsc68"
         export LIBS="-lsc68 -lfile68 -lunice68"
         export TOOLCHAIN=${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin
@@ -152,8 +149,8 @@ jobs:
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
         cd ../../../../bin
-        $GCC -std=c99 -I${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include $INCLUDES -O3 -c -fPIC ../../$NAME.c
-        $GCC -s -L$LIBS_DIR/_compiled/$DIST -shared -o lib$NAME.so $NAME.o -Wl,-Bstatic $LIBS -lportaudio -Wl,-Bdynamic -lm -lz -lOpenSLES
+        armv7a-linux-androideabi22-clang -std=c99 -I${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include $INCLUDES -O3 -c -fPIC ../../$NAME.c
+        armv7a-linux-androideabi22-clang -s -L$LIBS_DIR/_compiled/$DIST -shared -o lib$NAME.so $NAME.o -Wl,-Bstatic $LIBS -lportaudio -Wl,-Bdynamic -lm -lz -lOpenSLES
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
@@ -162,7 +159,6 @@ jobs:
         export DIST=x86_64-w64-mingw32
         export NAME=sc68_player
         export LIBS_DIR=~/libs/_compiled/$DIST
-        export GCC=x86_64-w64-mingw32-gcc
         export INCLUDES="-I$LIBS_DIR/portaudio/src/include -I$LIBS_DIR/sc68-svn/sc68/file68 -I$LIBS_DIR/sc68-svn/sc68/libsc68"
         export LIBS="-lsc68 -lfile68 -lunice68"
         mkdir libs/_compiled/$DIST
@@ -194,15 +190,14 @@ jobs:
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
         cd ../../../../bin
-        $GCC -std=c99 -D_WIN64 $INCLUDES -O3 -c -fPIC ../../$NAME.c
-        $GCC -s -L$LIBS_DIR/_compiled/$DIST -shared -o $NAME.dll $NAME.o -Wl,-Bstatic $LIBS -lportaudio -Wl,-Bdynamic -lm -lwinmm
+        x86_64-w64-mingw32-gcc -std=c99 -D_WIN64 $INCLUDES -O3 -c -fPIC ../../$NAME.c
+        x86_64-w64-mingw32-gcc -s -L$LIBS_DIR/_compiled/$DIST -shared -o $NAME.dll $NAME.o -Wl,-Bstatic $LIBS -lportaudio -Wl,-Bdynamic -lm -lwinmm
 
     - name: win32-x86
       run: |
         export DIST=i686-w64-mingw32
         export LIBS_DIR=~/libs/_compiled/$DIST
         export NAME=sc68_player
-        export GCC=i686-w64-mingw32-gcc
         export INCLUDES="-I$LIBS_DIR/portaudio/src/include -I$LIBS_DIR/sc68-svn/sc68/file68 -I$LIBS_DIR/sc68-svn/sc68/libsc68"
         export LIBS="-lsc68 -lfile68 -lunice68"
         mkdir libs/_compiled/$DIST
@@ -231,8 +226,8 @@ jobs:
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
         cd ../../../../bin
-        $GCC -std=c99 -D_WIN32 $INCLUDES -O3 -c -fPIC ../../$NAME.c
-        $GCC -s -L$LIBS_DIR/_compiled/$DIST -shared -o $NAME.dll $NAME.o -Wl,-Bstatic $LIBS -lportaudio -Wl,-Bdynamic -lm -lwinmm
+        i686-w64-mingw32-gcc -std=c99 -D_WIN32 $INCLUDES -O3 -c -fPIC ../../$NAME.c
+        i686-w64-mingw32-gcc -s -L$LIBS_DIR/_compiled/$DIST -shared -o $NAME.dll $NAME.o -Wl,-Bstatic $LIBS -lportaudio -Wl,-Bdynamic -lm -lwinmm
 
   darwin:
     runs-on: macos-latest
@@ -266,7 +261,6 @@ jobs:
       run: |
         export DIST=x86_64-apple-darwin11
         export NAME=sc68_player
-        export GCC=gcc
         export LIBS_DIR=~/libs/_compiled/$DIST
         export INCLUDES="-I$LIBS_DIR/portaudio/src/include -I$LIBS_DIR/sc68-svn/sc68/file68 -I$LIBS_DIR/sc68-svn/sc68/libsc68"
         export LIBS="-lsc68 -lfile68 -lunice68"
@@ -294,5 +288,5 @@ jobs:
         cd ../../../..
         mkdir bin
         cd bin
-        $GCC -std=c99 $INCLUDES -O3 -c -fPIC ../../$NAME.c
-        $GCC -s -L$LIBS_DIR/_compiled/$DIST -shared -o lib$NAME.so $NAME.o -Wl,-Bstatic $LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
+        gcc -std=c99 $INCLUDES -O3 -c -fPIC ../../$NAME.c
+        gcc -s -L$LIBS_DIR/_compiled/$DIST -shared -o lib$NAME.so $NAME.o -Wl,-Bstatic $LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
