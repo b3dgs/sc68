@@ -94,7 +94,7 @@ jobs:
         cd ../../..
         mkdir portaudio/_build/$DIST
         cd portaudio/_build/$DIST
-        ../../portaudio_opensles/configure --enable-static --disable-shared CC=$DIST-clang CFLAGS=-fPIC LDFLAGS='-pthread' CC=aarch64-linux-android22-clang
+        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared CC=$DIST-clang CFLAGS=-fPIC LDFLAGS='-pthread' CC=aarch64-linux-android22-clang
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
       env:
@@ -123,7 +123,7 @@ jobs:
         cd ../../..
         mkdir portaudio/_build/$DIST
         cd portaudio/_build/$DIST
-        ../../portaudio_opensles/configure --enable-static --disable-shared CC=$DIST-clang CFLAGS=-fPIC LDFLAGS='-pthread'
+        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared CC=$DIST-clang CFLAGS=-fPIC LDFLAGS='-pthread'
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
       env:
@@ -157,7 +157,7 @@ jobs:
         cd ../../..
         mkdir portaudio/_build/$DIST
         cd portaudio/_build/$DIST
-        ../../portaudio_opensles/configure --enable-static --disable-shared CFLAGS=-fPIC --disable-external-libs
+        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared CFLAGS=-fPIC --disable-external-libs
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
 
@@ -186,7 +186,7 @@ jobs:
         cd ../../..
         mkdir portaudio/_build/$DIST
         cd portaudio/_build/$DIST
-        ../../portaudio_opensles/configure --enable-static --disable-shared CFLAGS=-fPIC --disable-external-libs
+        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared CFLAGS=-fPIC --disable-external-libs
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
 
