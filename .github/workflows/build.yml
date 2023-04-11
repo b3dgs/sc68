@@ -330,7 +330,7 @@ jobs:
         mkdir bin/$DIST
         cd bin/$DIST
         $DST_GCC -dynamiclib -std=c99 $DST_INCLUDES -O3 -c -fPIC ../../$DST_NAME.c
-        $DST_GCC -framework CoreServices CoreAudio -L$DST_LIBS_DIR/_compiled/$DIST -o lib$DST_NAME.dylib $DST_NAME.o -Wl -lcurl $DST_LIBS -lportaudio -pthread -lm -lz
+        $DST_GCC -framework CoreAudio -framework AudioToolbox -framework AudioUnit -framework CoreFoundation -framework CoreServices -L$DST_LIBS_DIR/_compiled/$DIST -o lib$DST_NAME.dylib $DST_NAME.o -Wl -lcurl $DST_LIBS -lportaudio -pthread -lm -lz
         cd ../..
         mkdir output/darwin-x86-64
         ls bin/$DIST/
