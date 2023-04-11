@@ -87,7 +87,7 @@ jobs:
     - name: armeabi-v7a
       run: |
         export DIST=armv7a-linux-androideabi22
-        export TOOLCHAIN=${{ ANDROID_NDK_HOME }}/toolchains/llvm/prebuilt/linux-x86_64/bin
+        export TOOLCHAIN=${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin
         export PATH=$PATH:$TOOLCHAIN
         mkdir libs/_compiled/$DIST
         cd libs/sc68-svn/_build
