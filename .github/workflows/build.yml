@@ -39,8 +39,8 @@ jobs:
         cd libs/portaudio
         mkdir _build
         git clone https://github.com/croissanne/portaudio_opensles.git
-        ls
         cd portaudio_opensles
+        ls
         ./install-sh
         cd ../..
         git clone https://github.com/madler/zlib.git
