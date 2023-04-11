@@ -50,7 +50,7 @@ jobs:
     - name: linux-x86_64
       run: |
         DIST=x86_64-pc-linux-gnu
-        DST_NAME=sc68_player
+        DST_NAME=sc68
         DST_GCC=gcc
         DST_LIBS_DIR=$(pwd)/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
@@ -80,16 +80,16 @@ jobs:
         mkdir bin
         mkdir bin/$DIST
         cd bin/$DIST
-        $DST_GCC -std=c99 $DST_INCLUDES -O3 -c -fPIC ../../$DST_NAME.c
+        $DST_GCC -std=c99 $DST_INCLUDES -O3 -c -fPIC "../../"$DST_NAME"_player.c"
         $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME.o -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
         cd ../..
         mkdir output/linux-x86-64
-        cp bin/$DIST/libsc68_player.so output/linux-x86-64/libsc68.so
+        cp bin/$DIST/libsc68.so output/linux-x86-64/
 
     - name: arm64-v8a
       run: |
         DIST=aarch64-linux-androideabi22
-        DST_NAME=sc68_player
+        DST_NAME=sc68
         DST_GCC=aarch64-linux-android22-clang
         DST_LIBS_DIR=$(pwd)/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
@@ -121,18 +121,18 @@ jobs:
         cd ../../../../bin
         mkdir $DIST
         cd $DIST
-        $DST_GCC -std=c99 -I${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include $DST_INCLUDES -O3 -c -fPIC ../../$DST_NAME.c
+        $DST_GCC -std=c99 -I${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include $DST_INCLUDES -O3 -c -fPIC "../../"$DST_NAME"_player.c"
         $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME.o -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -lm -lz -lOpenSLES
         cd ../..
         mkdir output/arm64-v8a
-        cp bin/$DIST/libsc68_player.so output/arm64-v8a/libsc68.so
+        cp bin/$DIST/libsc68.so output/arm64-v8a/
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
     - name: armeabi-v7a
       run: |
         DIST=armv7a-linux-androideabi22
-        DST_NAME=sc68_player
+        DST_NAME=sc68
         DST_GCC=armv7a-linux-androideabi22-clang
         DST_LIBS_DIR=$(pwd)/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
@@ -164,18 +164,18 @@ jobs:
         cd ../../../../bin
         mkdir $DIST
         cd $DIST
-        $DST_GCC -std=c99 -I${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include $DST_INCLUDES -O3 -c -fPIC ../../$DST_NAME.c
+        $DST_GCC -std=c99 -I${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include $DST_INCLUDES -O3 -c -fPIC "../../"$DST_NAME"_player.c"
         $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME.o -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -lm -lz -lOpenSLES
         cd ../..
         mkdir output/armeabi-v7a
-        cp bin/$DIST/libsc68_player.so output/armeabi-v7a/libsc68.so
+        cp bin/$DIST/libsc68.so output/armeabi-v7a/
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
     - name: win32-x86_64
       run: |
         DIST=x86_64-w64-mingw32
-        DST_NAME=sc68_player
+        DST_NAME=sc68
         DST_GCC=x86_64-w64-mingw32-gcc
         DST_LIBS_DIR=$(pwd)/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
@@ -211,16 +211,16 @@ jobs:
         cd ../../../../bin
         mkdir $DIST
         cd $DIST
-        $DST_GCC -std=c99 -D_WIN64 $DST_INCLUDES -O3 -c -fPIC ../../$DST_NAME.c
+        $DST_GCC -std=c99 -D_WIN64 $DST_INCLUDES -O3 -c -fPIC "../../"$DST_NAME"_player.c"
         $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o $DST_NAME.dll $DST_NAME.o -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -lm -lwinmm
         cd ../..
         mkdir output/win32-x86-64
-        cp bin/$DIST/sc68_player.dll output/win32-x86-64/sc68.dll
+        cp bin/$DIST/sc68.dll output/win32-x86-64/
 
     - name: win32-x86
       run: |
         DIST=i686-w64-mingw32
-        DST_NAME=sc68_player
+        DST_NAME=sc68
         DST_GCC=i686-w64-mingw32-gcc
         DST_LIBS_DIR=$(pwd)/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
@@ -253,19 +253,21 @@ jobs:
         cd ../../../../bin
         mkdir $DIST
         cd $DIST
-        $DST_GCC -std=c99 -D_WIN32 $DST_INCLUDES -O3 -c -fPIC ../../$DST_NAME.c
+        $DST_GCC -std=c99 -D_WIN32 $DST_INCLUDES -O3 -c -fPIC "../../"$DST_NAME"_player.c"
         $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o $DST_NAME.dll $DST_NAME.o -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -lm -lwinmm
         cd ../..
         mkdir output/win32-x86
-        cp bin/$DIST/sc68_player.dll output/win32-x86/sc68.dll
+        cp bin/$DIST/sc68.dll output/win32-x86/
 
     - name: Deploy
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      uses: dennisameling/ftp-upload-action@v1.0.10
       with:
         server: ftp.b3dgs.com
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASS }}
-        local-dir: output/
+        local_dir: output/
+        server_dir: /
+        secure: false
 
   darwin:
     runs-on: macos-latest
@@ -299,7 +301,7 @@ jobs:
     - name: compile
       run: |
         DIST=x86_64-apple-darwin11
-        DST_NAME=sc68_player
+        DST_NAME=sc68
         DST_GCC=clang
         DST_LIBS_DIR=$(pwd)/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
@@ -329,14 +331,14 @@ jobs:
         mkdir bin
         mkdir bin/$DIST
         cd bin/$DIST
-        $DST_GCC -std=c99 $DST_INCLUDES -O3 -c -fPIC ../../$DST_NAME.c
+        $DST_GCC -std=c99 $DST_INCLUDES -O3 -c -fPIC "../../"$DST_NAME"_player.c"
         $DST_GCC -dynamiclib -framework CoreAudio -framework AudioToolbox -framework AudioUnit -framework CoreFoundation -framework CoreServices -L$DST_LIBS_DIR/_compiled/$DIST -o lib$DST_NAME.dylib $DST_NAME.o -lcurl $DST_LIBS -lportaudio -pthread -lm -lz
         cd ../..
         mkdir output/darwin-x86-64
         ls bin/$DIST/
-        cp bin/$DIST/libsc68_player.dylib output/darwin-x86-64/libsc68.dylib
+        cp bin/$DIST/libsc68.dylib output/darwin-x86-64/
 
-    - name: Deploy Archive
+    - name: Deploy
       uses: dennisameling/ftp-upload-action@v1.0.10
       with:
         server: ftp.b3dgs.com
