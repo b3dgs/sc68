@@ -29,13 +29,19 @@ jobs:
         add-to-path: true
         local-cache: true
 
-    - name: sc68-svn
+    - name: libs
       run: |
         mkdir libs
         mkdir libs/_compiled
         mkdir libs/sc68-svn
         mkdir libs/sc68-svn/_build
-        cd libs
+        mkdir libs/portaudio
+        cd libs/portaudio
+        mkdir _build
+        git clone https://github.com/croissanne/portaudio_opensles.git
+        cd portaudio_opensles-master
+        ./install-sh
+        cd ../..
         git clone https://github.com/madler/zlib.git
         cd sc68-svn
         svn checkout http://svn.code.sf.net/p/sc68/code/ sc68
@@ -60,6 +66,10 @@ jobs:
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
+        cd ../../../portaudio/_build/$DIST
+        ../../portaudio_opensles-master/configure --host=$DIST --enable-static --disable-shared CFLAGS=-fPIC
+        make
+        cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
 
     - name: arm64-v8a
       run: |
@@ -81,6 +91,10 @@ jobs:
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
+        cd ../../../portaudio/_build/$DIST
+        ../../portaudio_opensles-master/configure --enable-static --disable-shared CC=$DIST-clang CFLAGS=-fPIC LDFLAGS='-pthread' CC=aarch64-linux-android22-clang
+        make
+        cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
@@ -104,6 +118,10 @@ jobs:
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
+        cd ../../../portaudio/_build/$DIST
+        ../../portaudio_opensles-master/configure --enable-static --disable-shared CC=$DIST-clang CFLAGS=-fPIC LDFLAGS='-pthread'
+        make
+        cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
@@ -132,6 +150,10 @@ jobs:
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
+        cd ../../../portaudio/_build/$DIST
+        ../../portaudio_opensles-master/configure --enable-static --disable-shared CFLAGS=-fPIC --disable-external-libs
+        make
+        cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
 
     - name: win32-x86
       run: |
@@ -155,6 +177,10 @@ jobs:
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
+        cd ../../../portaudio/_build/$DIST
+        ../../portaudio_opensles-master/configure --enable-static --disable-shared CFLAGS=-fPIC --disable-external-libs
+        make
+        cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
 
   darwin:
     runs-on: macos-latest
@@ -167,23 +193,39 @@ jobs:
 
     - name: Dependencies
       run: |
-        brew install autoconf automake libtool
+        brew install autoconf gawk mawk nawk
 
-    - name: sc68-svn
+    - name: libs
       run: |
         mkdir libs
         mkdir libs/_compiled
         mkdir libs/sc68-svn
         mkdir libs/sc68-svn/_build
-        cd libs/sc68-svn
+        mkdir libs/portaudio
+        cd libs/portaudio
+        mkdir _build
+        git clone https://github.com/croissanne/portaudio_opensles.git
+        cd portaudio_opensles-master
+        ./install-sh
+        cd ../../sc68-svn
         svn checkout http://svn.code.sf.net/p/sc68/code/ sc68
         cd sc68
         ./tools/svn-bootstrap.sh
 
-    - name: compile
+    - name: compile portaudio
       run: |
         export DIST=x86_64-apple-darwin11
         mkdir libs/_compiled/$DIST
+        cd libs/portaudio/_build
+        mkdir $DIST
+        cd $DIST
+        ../../portaudio_opensles-master/configure --enable-static --disable-shared --disable-mac-universal CC=clang CFLAGS=-fPIC
+        make
+        cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
+
+    - name: compile sc68
+      run: |
+        export DIST=x86_64-apple-darwin11
         cd libs/sc68-svn/_build
         mkdir $DIST
         cd $DIST
