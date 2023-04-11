@@ -64,7 +64,9 @@ jobs:
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
-        cd ../../../portaudio/_build/$DIST
+        cd ../../..
+        mkdir portaudio/_build/$DIST
+        cd portaudio/_build/$DIST
         ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared CFLAGS=-fPIC
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
@@ -89,7 +91,9 @@ jobs:
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
-        cd ../../../portaudio/_build/$DIST
+        cd ../../..
+        mkdir portaudio/_build/$DIST
+        cd portaudio/_build/$DIST
         ../../portaudio_opensles/configure --enable-static --disable-shared CC=$DIST-clang CFLAGS=-fPIC LDFLAGS='-pthread' CC=aarch64-linux-android22-clang
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
@@ -116,7 +120,9 @@ jobs:
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
-        cd ../../../portaudio/_build/$DIST
+        cd ../../..
+        mkdir portaudio/_build/$DIST
+        cd portaudio/_build/$DIST
         ../../portaudio_opensles/configure --enable-static --disable-shared CC=$DIST-clang CFLAGS=-fPIC LDFLAGS='-pthread'
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
@@ -148,7 +154,9 @@ jobs:
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
-        cd ../../../portaudio/_build/$DIST
+        cd ../../..
+        mkdir portaudio/_build/$DIST
+        cd portaudio/_build/$DIST
         ../../portaudio_opensles/configure --enable-static --disable-shared CFLAGS=-fPIC --disable-external-libs
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
@@ -175,7 +183,9 @@ jobs:
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
-        cd ../../../portaudio/_build/$DIST
+        cd ../../..
+        mkdir portaudio/_build/$DIST
+        cd portaudio/_build/$DIST
         ../../portaudio_opensles/configure --enable-static --disable-shared CFLAGS=-fPIC --disable-external-libs
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
@@ -191,7 +201,7 @@ jobs:
 
     - name: Dependencies
       run: |
-        brew install autoconf gawk mawk
+        brew install autoconf automake gawk mawk
 
     - name: libs
       run: |
@@ -208,18 +218,7 @@ jobs:
         cd sc68
         ./tools/svn-bootstrap.sh
 
-    - name: compile portaudio
-      run: |
-        export DIST=x86_64-apple-darwin11
-        mkdir libs/_compiled/$DIST
-        cd libs/portaudio/_build
-        mkdir $DIST
-        cd $DIST
-        ../../portaudio_opensles/configure --enable-static --disable-shared --disable-mac-universal CC=clang CFLAGS=-fPIC
-        make
-        cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
-
-    - name: compile sc68
+    - name: compile
       run: |
         export DIST=x86_64-apple-darwin11
         cd libs/sc68-svn/_build
@@ -236,3 +235,9 @@ jobs:
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
         cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
+        cd ../../..
+        mkdir portaudio/_build/$DIST
+        cd portaudio/_build/$DIST
+        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared --disable-mac-universal CC=clang CFLAGS=-fPIC
+        make
+        cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
