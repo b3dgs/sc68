@@ -39,10 +39,7 @@ jobs:
         cd libs/portaudio
         mkdir _build
         git clone https://github.com/croissanne/portaudio_opensles.git
-        cd portaudio_opensles
-        ls
-        ./install-sh
-        cd ../..
+        cd ..
         git clone https://github.com/madler/zlib.git
         cd sc68-svn
         svn checkout http://svn.code.sf.net/p/sc68/code/ sc68
@@ -206,10 +203,7 @@ jobs:
         cd libs/portaudio
         mkdir _build
         git clone https://github.com/croissanne/portaudio_opensles.git
-        ls
-        cd portaudio_opensles
-        ./install-sh
-        cd ../../sc68-svn
+        cd ../sc68-svn
         svn checkout http://svn.code.sf.net/p/sc68/code/ sc68
         cd sc68
         ./tools/svn-bootstrap.sh
