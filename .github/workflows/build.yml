@@ -167,10 +167,20 @@ jobs:
 
     - name: Dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install build-essential alsa-tools libasound2-dev alsa-utils alsa-oss pavucontrol autoconf automake libtool pkg-config libao-dev libao-common subversion mingw-w64 gawk mawk libpulse-dev libcurl4 pulseaudio pulseaudio-utils cmake gcc-multilib g++-multilib musl musl-tools libsdl2-mixer-2.0-0 libsdl2-mixer-dev
+        brew install build-essential alsa-tools libasound2-dev alsa-utils alsa-oss pavucontrol autoconf automake libtool pkg-config libao-dev libao-common subversion gawk mawk libpulse-dev libcurl4 pulseaudio pulseaudio-utils cmake gcc-multilib g++-multilib musl musl-tools libsdl2-mixer-2.0-0 libsdl2-mixer-dev
 
-    - name: win32-x86
+    - name: sc68-svn
+      run: |
+        mkdir libs
+        mkdir libs/_compiled
+        mkdir libs/sc68-svn
+        mkdir libs/sc68-svn/_build
+        cd libs/sc68-svn
+        svn checkout http://svn.code.sf.net/p/sc68/code/ sc68
+        cd sc68
+        ./tools/svn-bootstrap.sh
+
+    - name: compile
       run: |
         export DIST=x86_64-apple-darwin11
         mkdir libs/_compiled/$DIST
