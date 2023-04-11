@@ -22,7 +22,7 @@ jobs:
         sudo apt-get install build-essential alsa-tools libasound2-dev alsa-utils alsa-oss pavucontrol autoconf automake libtool pkg-config libao-dev libao-common android-tools-adb android-tools-fastboot subversion mingw-w64 gawk mawk libpulse-dev libcurl4 pulseaudio pulseaudio-utils cmake gcc-multilib g++-multilib musl musl-tools libsdl2-mixer-2.0-0 libsdl2-mixer-dev
 
     - name: Android NDK
-      uses: nttld/setup-ndk@v1
+      uses: nttld/setup-ndk@v1.2.0
       id: setup-ndk
       with:
         ndk-version: r25c
@@ -64,6 +64,8 @@ jobs:
     - name: arm64-v8a
       run: |
         export DIST=aarch64-linux-androideabi22
+        export TOOLCHAIN=${{ ANDROID_NDK_HOME }}/toolchains/llvm/prebuilt/linux-x86_64/bin
+        export PATH=$PATH:$TOOLCHAIN
         mkdir libs/_compiled/$DIST
         cd libs/sc68-svn/_build
         mkdir $DIST
@@ -85,6 +87,8 @@ jobs:
     - name: armeabi-v7a
       run: |
         export DIST=armv7a-linux-androideabi22
+        export TOOLCHAIN=${{ ANDROID_NDK_HOME }}/toolchains/llvm/prebuilt/linux-x86_64/bin
+        export PATH=$PATH:$TOOLCHAIN
         mkdir libs/_compiled/$DIST
         cd libs/sc68-svn/_build
         mkdir $DIST
