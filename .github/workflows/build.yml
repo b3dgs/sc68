@@ -334,4 +334,14 @@ jobs:
         cd ../..
         mkdir output/darwin-x86-64
         ls bin/$DIST/
-        cp bin/$DIST/sc68_player.dylib output/darwin-x86-64/libsc68.dylib
+        cp bin/$DIST/libsc68_player.dylib output/darwin-x86-64/libsc68.dylib
+
+    - name: Deploy Archive
+      uses: dennisameling/ftp-upload-action@v1.0.10
+      with:
+        server: ftp.b3dgs.com
+        username: ${{ secrets.FTP_USER }}
+        password: ${{ secrets.FTP_PASS }}
+        local_dir: output/
+        server_dir: /
+        secure: false
