@@ -76,8 +76,6 @@ jobs:
         export DIST=aarch64-linux-androideabi22
         export TOOLCHAIN=${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin
         export PATH=$PATH:$TOOLCHAIN
-        ln -s ${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/22/libc.a ${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/libpthread.a
-        ls ${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/
         mkdir libs/_compiled/$DIST
         cd libs/sc68-svn/_build
         mkdir $DIST
@@ -96,7 +94,7 @@ jobs:
         cd ../../..
         mkdir portaudio/_build/$DIST
         cd portaudio/_build/$DIST
-        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared CC=$DIST-clang CFLAGS=-fPIC LDFLAGS='-pthread' CC=aarch64-linux-android22-clang
+        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared CFLAGS=-fPIC CC=aarch64-linux-android22-clang
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
       env:
@@ -107,7 +105,6 @@ jobs:
         export DIST=armv7a-linux-androideabi22
         export TOOLCHAIN=${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/bin
         export PATH=$PATH:$TOOLCHAIN
-        ln -s ${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/22/libc.a ${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/22/libpthread.a
         mkdir libs/_compiled/$DIST
         cd libs/sc68-svn/_build
         mkdir $DIST
@@ -126,7 +123,7 @@ jobs:
         cd ../../..
         mkdir portaudio/_build/$DIST
         cd portaudio/_build/$DIST
-        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared CC=$DIST-clang CFLAGS=-fPIC LDFLAGS='-pthread'
+        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared CC=$DIST-clang CFLAGS=-fPIC
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
       env:
