@@ -31,6 +31,7 @@ jobs:
 
     - name: libs
       run: |
+        mkdir output
         mkdir libs
         mkdir libs/_compiled
         mkdir libs/sc68-svn
@@ -81,6 +82,9 @@ jobs:
         cd bin/$DIST
         $DST_GCC -std=c99 $DST_INCLUDES -O3 -c -fPIC ../../$DST_NAME.c
         $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME.o -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
+        cd ../..
+        mkdir output/linux-x86-64
+        cp bin/$DIST/libsc68.so output/linux-x86-64/
 
     - name: arm64-v8a
       run: |
@@ -119,6 +123,9 @@ jobs:
         cd $DIST
         $DST_GCC -std=c99 -I${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include $DST_INCLUDES -O3 -c -fPIC ../../$DST_NAME.c
         $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME.o -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -lm -lz -lOpenSLES
+        cd ../..
+        mkdir output/arm64-v8a
+        cp bin/$DIST/libsc68.so output/arm64-v8a/
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
@@ -159,6 +166,9 @@ jobs:
         cd $DIST
         $DST_GCC -std=c99 -I${{ steps.setup-ndk.outputs.ndk-path }}/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include $DST_INCLUDES -O3 -c -fPIC ../../$DST_NAME.c
         $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME.o -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -lm -lz -lOpenSLES
+        cd ../..
+        mkdir output/armeabi-v7a
+        cp bin/$DIST/libsc68.so output/armeabi-v7a/
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
@@ -203,6 +213,9 @@ jobs:
         cd $DIST
         $DST_GCC -std=c99 -D_WIN64 $DST_INCLUDES -O3 -c -fPIC ../../$DST_NAME.c
         $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o $DST_NAME.dll $DST_NAME.o -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -lm -lwinmm
+        cd ../..
+        mkdir output/win32-x86-64
+        cp bin/$DIST/sc68.dll output/win32-x86-64/
 
     - name: win32-x86
       run: |
@@ -242,6 +255,10 @@ jobs:
         cd $DIST
         $DST_GCC -std=c99 -D_WIN32 $DST_INCLUDES -O3 -c -fPIC ../../$DST_NAME.c
         $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DST_DIST -shared -o $DST_NAME.dll $DST_NAME.o -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -lm -lwinmm
+        cd ../..
+        mkdir output/win32-x86
+        cp bin/$DIST/sc68.dll output/win32-x86/
+        ls output/**
 
   darwin:
     runs-on: macos-latest
@@ -258,6 +275,7 @@ jobs:
 
     - name: libs
       run: |
+        mkdir output
         mkdir libs
         mkdir libs/_compiled
         mkdir libs/sc68-svn
@@ -305,4 +323,8 @@ jobs:
         mkdir bin/$DIST
         cd bin/$DIST
         $DST_GCC -std=c99 $DST_INCLUDES -O3 -c -fPIC ../../$DST_NAME.c
-        $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME.o -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
+        $DST_GCC -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME.o -Wl $DST_LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
+        cd ../..
+        mkdir output/darwin-x86-64
+        ls bin/$DIST/
+        cp bin/$DIST/libsc68.dylib output/darwin-x86-64/
