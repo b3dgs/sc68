@@ -165,6 +165,10 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Dependencies
+      run: |
+        brew install autoconf automake libtool
+
     - name: sc68-svn
       run: |
         mkdir libs
