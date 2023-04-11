@@ -84,8 +84,7 @@ jobs:
         $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME.o -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
         cd ../..
         mkdir output/linux-x86-64
-        ls bin/$DIST
-        cp bin/$DIST/sc68_player.so output/linux-x86-64/
+        cp bin/$DIST/libsc68_player.so output/linux-x86-64/
 
     - name: arm64-v8a
       run: |
@@ -126,7 +125,7 @@ jobs:
         $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME.o -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -lm -lz -lOpenSLES
         cd ../..
         mkdir output/arm64-v8a
-        cp bin/$DIST/sc68_player.so output/arm64-v8a/
+        cp bin/$DIST/libsc68_player.so output/arm64-v8a/
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
@@ -169,7 +168,7 @@ jobs:
         $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME.o -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -lm -lz -lOpenSLES
         cd ../..
         mkdir output/armeabi-v7a
-        cp bin/$DIST/sc68_player.so output/armeabi-v7a/
+        cp bin/$DIST/libsc68_player.so output/armeabi-v7a/
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
@@ -272,7 +271,7 @@ jobs:
 
     - name: Dependencies
       run: |
-        brew install autoconf automake gawk mawk
+        brew install autoconf automake gawk mawk libasound2-dev
 
     - name: libs
       run: |
