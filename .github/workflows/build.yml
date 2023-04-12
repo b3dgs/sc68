@@ -95,7 +95,12 @@ jobs:
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
         DST_LIBS="-lsc68 -lfile68 -lunice68"
         mkdir libs/_compiled/$DIST
-        cd libs/sc68-svn/_build
+        cd libs/zlib/build
+        mkdir $DIST
+        cd $DIST
+        ../../configure --prefix=$DIST --static CFLAGS="-m32"
+        make
+        cd ../../../sc68-svn/_build
         mkdir $DIST
         cd $DIST
         mkdir as68
@@ -104,7 +109,7 @@ jobs:
         make
         make install
         cd ..
-        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS="-fPIC -m32"
+        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS="-fPIC -m32" LDFLAGS="-L/home/runner/work/sc68/sc68/libs/zlib/build/$DIST/"
         make
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
