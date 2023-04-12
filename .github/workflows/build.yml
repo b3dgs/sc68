@@ -357,6 +357,7 @@ jobs:
         packages: >
           build-base
           alsa-lib
+          alsa-lib-dev
           alsa-utils
           make
           autoconf
