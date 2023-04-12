@@ -371,6 +371,7 @@ jobs:
           git
           gawk
           mawk
+          zlib
           pulseaudio
           pulseaudio-utils
 
