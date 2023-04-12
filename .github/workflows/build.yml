@@ -378,6 +378,7 @@ jobs:
           pulseaudio-utils
 
     - name: compile
+      id: compile
       run: |
         DIST=i686-pc-linux-gnu
         DST_NAME=sc68
@@ -441,6 +442,6 @@ jobs:
         server: ftp.b3dgs.com
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASS }}
-        local_dir: ${{ steps.alpine-aarch64.outputs.root-path }}/sc68/output/
+        local_dir: ${{ steps.compile.outputs.root-path }}/sc68/output/
         server_dir: /
         secure: false
