@@ -434,7 +434,7 @@ jobs:
         mkdir bin/$DIST
         cd bin/$DIST
         $DST_GCC -static -std=c99 $DST_INCLUDES -O3 -fPIC -I/usr/glibc-compat/lib -c ../../$DST_NAME"_player.c" -Wl,--rpath=/usr/glibc-compat/lib
-        $DST_GCC -static -s -I/usr/glibc-compat/lib -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME"_player.o" $DST_LIBS -lc -lportaudio -lm -lpthread -lz -lasound -Wl,--rpath=/usr/glibc-compat/lib
+        $DST_GCC -static -s -I/usr/glibc-compat/lib -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME"_player.o" $DST_LIBS -lc -lportaudio -lm -lpthread -lz -lasound -Wl,--rpath=/usr/glibc-compat/lib -Wl,--dynamic-linker=/usr/glibc-compat/lib/ld-linux.so.2
         cd ../..
         mkdir output/linux-x86
         cp bin/$DIST/libsc68.so output/linux-x86/
