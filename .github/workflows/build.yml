@@ -101,7 +101,7 @@ jobs:
         cd build
         mkdir $DIST
         cd $DIST
-        CC=i686-linux-gnu-gcc CFLAGS="-m32" ../../configure --prefix=$DIST --static
+        prefix=$DIST CC=i686-linux-gnu-gcc ../../configure --static
         make
         cd ../../../sc68-svn/_build
         mkdir $DIST
