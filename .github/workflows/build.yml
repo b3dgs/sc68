@@ -429,8 +429,8 @@ jobs:
         cd ../../../..
         mkdir bin/$DIST
         cd bin/$DIST
-        $DST_GCC -std=c99 $DST_INCLUDES -O3 -fPIC -c ../../$DST_NAME"_player.c"
-        $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME"_player.o" -Wl,-Bstatic $DST_LIBS -lportaudio -musl-libc -Wl,-Bdynamic -pthread -lm -lz -lasound
+        $DST_GCC -static -std=c99 $DST_INCLUDES -O3 -fPIC -c ../../$DST_NAME"_player.c"
+        $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME"_player.o" -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
         cd ../..
         mkdir output/linux-x86
         cp bin/$DIST/libsc68.so output/linux-x86/
