@@ -86,51 +86,6 @@ jobs:
         mkdir output/linux-x86-64
         cp bin/$DIST/libsc68.so output/linux-x86-64/
 
-    - name: Setup Alpine Linux v3.15 for x86-32
-      uses: jirutka/setup-alpine@v1
-      with:
-        arch: x86
-        branch: v3.15
-
-    - name: linux-x86-32
-      run: |
-        DIST=i686-pc-linux-gnu
-        DST_NAME=sc68
-        DST_GCC=gcc
-        DST_LIBS_DIR=$(pwd)/libs
-        DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
-        DST_LIBS="-lsc68 -lfile68 -lunice68"
-        mkdir libs/_compiled/$DIST
-        cd libs/sc68-svn/_build
-        mkdir $DIST
-        cd $DIST
-        mkdir as68
-        cd as68
-        ../../../sc68/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS="-fPIC -m32"
-        make
-        make install
-        cd ..
-        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS="-fPIC -m32"
-        make
-        cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
-        cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
-        cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
-        cd ../../..
-        mkdir portaudio/_build/$DIST
-        cd portaudio/_build/$DIST
-        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared CFLAGS="-fPIC -m32"
-        make
-        cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
-        cd ../../../..
-        mkdir bin/$DIST
-        cd bin/$DIST
-        $DST_GCC -std=c99 $DST_INCLUDES -O3 -fPIC -m32 -c ../../$DST_NAME"_player.c"
-        $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -m32 -shared -o lib$DST_NAME.so $DST_NAME"_player.o" -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
-        cd ../..
-        mkdir output/linux-x86
-        cp bin/$DIST/libsc68.so output/linux-x86/
-      shell: alpine.sh {0}
-
     - name: arm64-v8a
       run: |
         DIST=aarch64-linux-androideabi22
@@ -379,6 +334,91 @@ jobs:
         mkdir output/darwin-x86-64
         ls bin/$DIST/
         cp bin/$DIST/libsc68.dylib output/darwin-x86-64/
+
+    - name: Deploy
+      uses: dennisameling/ftp-upload-action@v1.0.10
+      with:
+        server: ftp.b3dgs.com
+        username: ${{ secrets.FTP_USER }}
+        password: ${{ secrets.FTP_PASS }}
+        local_dir: output/
+        server_dir: /
+        secure: false
+
+  linux-x86-32:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install build-essential alsa-tools libasound2-dev alsa-utils alsa-oss pavucontrol autoconf automake libtool pkg-config libao-dev libao-common android-tools-adb android-tools-fastboot subversion mingw-w64 gawk mawk libpulse-dev libcurl4 pulseaudio pulseaudio-utils cmake gcc-multilib g++-multilib musl musl-tools libsdl2-mixer-2.0-0 libsdl2-mixer-dev
+
+    - name: Checkout
+      uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 0
+
+    - name: libs
+      run: |
+        mkdir output
+        mkdir libs
+        mkdir libs/_compiled
+        mkdir libs/sc68-svn
+        mkdir libs/sc68-svn/_build
+        mkdir libs/portaudio
+        cd libs/portaudio
+        mkdir _build
+        git clone https://github.com/croissanne/portaudio_opensles.git
+        cd ../sc68-svn
+        svn checkout http://svn.code.sf.net/p/sc68/code/ sc68
+        cd sc68
+        ./tools/svn-bootstrap.sh
+
+    - name: Setup Alpine Linux v3.15 for x86-32
+      uses: jirutka/setup-alpine@v1
+      with:
+        arch: x86
+        branch: v3.15
+
+    - name: compile
+      run: |
+        DIST=i686-pc-linux-gnu
+        DST_NAME=sc68
+        DST_GCC=gcc
+        DST_LIBS_DIR=$(pwd)/libs
+        DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
+        DST_LIBS="-lsc68 -lfile68 -lunice68"
+        mkdir libs/_compiled/$DIST
+        cd libs/sc68-svn/_build
+        mkdir $DIST
+        cd $DIST
+        mkdir as68
+        cd as68
+        ../../../sc68/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS="-fPIC -m32"
+        make
+        make install
+        cd ..
+        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS="-fPIC -m32"
+        make
+        cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
+        cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
+        cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
+        cd ../../..
+        mkdir portaudio/_build/$DIST
+        cd portaudio/_build/$DIST
+        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared CFLAGS="-fPIC -m32"
+        make
+        cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
+        cd ../../../..
+        mkdir bin/$DIST
+        cd bin/$DIST
+        $DST_GCC -std=c99 $DST_INCLUDES -O3 -fPIC -m32 -c ../../$DST_NAME"_player.c"
+        $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -m32 -shared -o lib$DST_NAME.so $DST_NAME"_player.o" -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
+        cd ../..
+        mkdir output/linux-x86
+        cp bin/$DIST/libsc68.so output/linux-x86/
+      shell: alpine.sh {0}
 
     - name: Deploy
       uses: dennisameling/ftp-upload-action@v1.0.10
