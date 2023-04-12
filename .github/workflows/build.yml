@@ -357,6 +357,7 @@ jobs:
         packages: >
           alsa-lib
           alsa-utils
+          make
           autoconf
           automake
           libtool
