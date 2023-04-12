@@ -422,7 +422,7 @@ jobs:
         cd ../..
         mkdir output/linux-x86
         cp bin/$DIST/libsc68.so output/linux-x86/
-      shell: alpine.sh {0}
+      shell: alpine.sh --root {0}
 
     - name: Deploy
       uses: dennisameling/ftp-upload-action@v1.0.10
