@@ -376,8 +376,7 @@ jobs:
           zlib
           zlib-dev
           zlib-static
-          musl
-          musl-dev
+          libc-dev
           gcc
           gcompat
           pulseaudio
@@ -435,7 +434,7 @@ jobs:
         mkdir bin/$DIST
         cd bin/$DIST
         $DST_GCC -static -std=c99 $DST_INCLUDES -O3 -fPIC -c ../../$DST_NAME"_player.c"
-        $DST_GCC -static -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME"_player.o" $DST_LIBS -libc -lportaudio -lm -lpthread -lz -lasound
+        $DST_GCC -static -s -I/usr/glibc-compat/lib -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME"_player.o" $DST_LIBS -lc -lportaudio -lm -lpthread -lz -lasound
         cd ../..
         mkdir output/linux-x86
         cp bin/$DIST/libsc68.so output/linux-x86/
