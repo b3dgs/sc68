@@ -375,7 +375,6 @@ jobs:
           zlib
           zlib-dev
           zlib-static
-          musl-static
           musl-dev
           gcompat
           pulseaudio
