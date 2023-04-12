@@ -376,6 +376,7 @@ jobs:
           zlib
           zlib-dev
           zlib-static
+          musl
           musl-dev
           gcc
           pulseaudio
