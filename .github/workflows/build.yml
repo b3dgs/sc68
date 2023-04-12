@@ -442,6 +442,6 @@ jobs:
         server: ftp.b3dgs.com
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASS }}
-        local_dir: ${{ steps.alpine-target.outputs.root-path }}/home/runner/work/sc68/output/
+        local_dir: ${{ steps.alpine-target.outputs.root-path }}/home/runner/work/sc68/sc68/output/
         server_dir: /
         secure: false
