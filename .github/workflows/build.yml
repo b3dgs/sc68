@@ -379,12 +379,13 @@ jobs:
         DIST=i686-pc-linux-gnu
         DST_NAME=sc68
         DST_GCC=gcc
-        DST_LIBS_DIR=$(pwd)/libs
+        DST_LIBS_DIR=$(pwd)/sc68/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
         DST_LIBS="-lsc68 -lfile68 -lunice68"
         addgroup root audio
         alsamixer
         git clone https://github.com/b3dgs/sc68.git
+        cd sc68
         mkdir output
         mkdir bin
         mkdir libs
@@ -437,6 +438,6 @@ jobs:
         server: ftp.b3dgs.com
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASS }}
-        local_dir: ${{ steps.alpine-aarch64.outputs.root-path }}/output/
+        local_dir: ${{ steps.alpine-aarch64.outputs.root-path }}/sc68/output/
         server_dir: /
         secure: false
