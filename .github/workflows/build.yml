@@ -95,7 +95,10 @@ jobs:
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
         DST_LIBS="-lsc68 -lfile68 -lunice68"
         mkdir libs/_compiled/$DIST
-        cd libs/zlib/build
+        cd libs
+        cd zlib
+        mkdir build
+        cd build
         mkdir $DIST
         cd $DIST
         ../../configure --prefix=$DIST --static CFLAGS="-m32"
@@ -225,10 +228,7 @@ jobs:
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
         DST_LIBS="-lsc68 -lfile68 -lunice68"
         mkdir libs/_compiled/$DIST
-        cd libs
-        cd zlib
-        mkdir build
-        cd build
+        cd libs/zlib/build
         mkdir $DIST
         cd $DIST
         ../../configure --prefix=$DIST --static
