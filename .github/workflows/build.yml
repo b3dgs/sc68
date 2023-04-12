@@ -372,6 +372,8 @@ jobs:
           gawk
           mawk
           zlib
+          zlib-dev
+          zlib-static
           pulseaudio
           pulseaudio-utils
 
