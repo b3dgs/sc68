@@ -361,6 +361,7 @@ jobs:
           gcc
           autoconf
           automake
+          libc6-dev
           libtool
           libao-dev
           subversion
