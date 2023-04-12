@@ -11,15 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3.5.0
-      with:
-        fetch-depth: 0
-
     - name: Dependencies
       run: |
         sudo apt-get update
         sudo apt-get install build-essential alsa-tools libasound2-dev alsa-utils alsa-oss pavucontrol autoconf automake libtool pkg-config libao-dev libao-common android-tools-adb android-tools-fastboot subversion mingw-w64 gawk mawk libpulse-dev libcurl4 pulseaudio pulseaudio-utils cmake gcc-multilib g++-multilib musl musl-tools libsdl2-mixer-2.0-0 libsdl2-mixer-dev
+
+    - name: Checkout
+      uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 0
 
     - name: Android NDK
       uses: nttld/setup-ndk@v1.2.0
@@ -101,7 +101,7 @@ jobs:
         cd build
         mkdir $DIST
         cd $DIST
-        ../../configure --prefix=$DIST --static CFLAGS="-m32"
+        CC=i686-linux-gnu-gcc CFLAGS="-m32" ../../configure --prefix=$DIST --static
         make
         cd ../../../sc68-svn/_build
         mkdir $DIST
