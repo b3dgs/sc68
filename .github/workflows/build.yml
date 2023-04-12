@@ -417,7 +417,7 @@ jobs:
         cd ../../..
         mkdir portaudio/_build/$DIST
         cd portaudio/_build/$DIST
-        ../../portaudio_opensles/configure --enable-static --disable-shared CFLAGS="-fPIC"
+        ../../portaudio_opensles/configure --enable-static --disable-shared --without-oss CFLAGS="-fPIC"
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
         cd ../../../..
