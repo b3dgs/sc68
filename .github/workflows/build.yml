@@ -362,6 +362,7 @@ jobs:
           libtool
           libao-dev
           subversion
+          git
           gawk
           mawk
           pulseaudio
