@@ -86,6 +86,12 @@ jobs:
         mkdir output/linux-x86-64
         cp bin/$DIST/libsc68.so output/linux-x86-64/
 
+    - name: Setup Alpine Linux v3.15 for x86-32
+      uses: jirutka/setup-alpine@v1
+      with:
+        arch: x86
+        branch: v3.15
+
     - name: linux-x86-32
       run: |
         DIST=i686-pc-linux-gnu
@@ -95,15 +101,7 @@ jobs:
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
         DST_LIBS="-lsc68 -lfile68 -lunice68"
         mkdir libs/_compiled/$DIST
-        cd libs
-        cd zlib
-        mkdir build
-        cd build
-        mkdir $DIST
-        cd $DIST
-        prefix=$DIST CFLAGS="-m32" ../../configure --static
-        make
-        cd ../../../sc68-svn/_build
+        cd libs/sc68-svn/_build
         mkdir $DIST
         cd $DIST
         mkdir as68
@@ -112,7 +110,7 @@ jobs:
         make
         make install
         cd ..
-        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS="-fPIC -m32" LDFLAGS="-L/home/runner/work/sc68/sc68/libs/zlib/build/$DIST/"
+        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS="-fPIC -m32"
         make
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
@@ -120,17 +118,18 @@ jobs:
         cd ../../..
         mkdir portaudio/_build/$DIST
         cd portaudio/_build/$DIST
-        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared CFLAGS="-fPIC -m32" LDFLAGS="-L/home/runner/work/sc68/sc68/libs/zlib/build/$DIST/"
+        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared CFLAGS="-fPIC -m32"
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
         cd ../../../..
         mkdir bin/$DIST
         cd bin/$DIST
         $DST_GCC -std=c99 $DST_INCLUDES -O3 -fPIC -m32 -c ../../$DST_NAME"_player.c"
-        $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -L/home/runner/work/sc68/sc68/libs/zlib/build/$DIST/ -m32 -shared -o lib$DST_NAME.so $DST_NAME"_player.o" -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
+        $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -m32 -shared -o lib$DST_NAME.so $DST_NAME"_player.o" -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
         cd ../..
         mkdir output/linux-x86
         cp bin/$DIST/libsc68.so output/linux-x86/
+      shell: alpine.sh {0}
 
     - name: arm64-v8a
       run: |
