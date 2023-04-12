@@ -355,13 +355,12 @@ jobs:
         arch: x86
         branch: v3.15
         packages: >
+          build-base
           alsa-lib
           alsa-utils
           make
-          gcc
           autoconf
           automake
-          libc6-dev
           libtool
           libao-dev
           subversion
