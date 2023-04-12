@@ -359,8 +359,6 @@ jobs:
         packages: >
           build-base
           coreutils
-          gcc
-          g++
           alsa-lib
           alsa-lib-dev
           alsa-utils-doc
@@ -379,7 +377,6 @@ jobs:
           zlib-dev
           zlib-static
           musl-dev
-          gcompat
           pulseaudio
           pulseaudio-utils
 
@@ -387,7 +384,7 @@ jobs:
       run: |
         DIST=i686-pc-linux-gnu
         DST_NAME=sc68
-        DST_GCC=gcc
+        DST_GCC=musl-gcc
         DST_LIBS_DIR=$(pwd)/sc68/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
         DST_LIBS="-lsc68 -lfile68 -lunice68"
@@ -435,7 +432,7 @@ jobs:
         mkdir bin/$DIST
         cd bin/$DIST
         $DST_GCC -static -std=c99 $DST_INCLUDES -O3 -fPIC -c ../../$DST_NAME"_player.c"
-        $DST_GCC -static -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME"_player.o" $DST_LIBS -lportaudio -lm -lz -lasound
+        $DST_GCC -static -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME"_player.o" $DST_LIBS -lportaudio -lz -lasound
         cd ../..
         mkdir output/linux-x86
         cp bin/$DIST/libsc68.so output/linux-x86/
