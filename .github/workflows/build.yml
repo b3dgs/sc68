@@ -386,6 +386,7 @@ jobs:
         alsamixer
         git clone https://github.com/b3dgs/sc68.git
         mkdir output
+        mkdir bin
         mkdir libs
         mkdir libs/_compiled
         mkdir libs/sc68-svn
