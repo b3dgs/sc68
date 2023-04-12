@@ -124,7 +124,6 @@ jobs:
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
         cd ../../../..
-        mkdir bin
         mkdir bin/$DIST
         cd bin/$DIST
         $DST_GCC -std=c99 $DST_INCLUDES -O3 -c -fPIC -m32 ../../$DST_NAME"_player.c"
