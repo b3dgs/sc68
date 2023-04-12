@@ -181,6 +181,7 @@ jobs:
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
         DST_LIBS="-lsc68 -lfile68 -lunice68"
         mkdir libs/_compiled/$DIST
+        mkdir libs/zlib/build
         cd libs/zlib/build
         mkdir $DIST
         cd $DIST
@@ -358,7 +359,9 @@ jobs:
           build-base
           alsa-lib
           alsa-lib-dev
-          alsa-utils
+          alsa-utils-doc
+          alsaconf
+          alsa-ucm-conf
           make
           autoconf
           automake
@@ -379,6 +382,8 @@ jobs:
         DST_LIBS_DIR=$(pwd)/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
         DST_LIBS="-lsc68 -lfile68 -lunice68"
+        addgroup root audio
+        alsamixer
         git clone https://github.com/b3dgs/sc68.git
         mkdir output
         mkdir libs
