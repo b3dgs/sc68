@@ -349,18 +349,46 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install build-essential alsa-tools libasound2-dev alsa-utils alsa-oss pavucontrol autoconf automake libtool pkg-config libao-dev libao-common android-tools-adb android-tools-fastboot subversion mingw-w64 gawk mawk libpulse-dev libcurl4 pulseaudio pulseaudio-utils cmake gcc-multilib g++-multilib musl musl-tools libsdl2-mixer-2.0-0 libsdl2-mixer-dev
-
+    - name: Setup Alpine Linux v3.15 for x86-32
+      uses: jirutka/setup-alpine@v1
+      with:
+        arch: x86
+        branch: v3.15
+        packages: >
+          build-essential
+          alsa-tools
+          libasound2-dev
+          alsa-utils
+          alsa-oss
+          autoconf
+          automake
+          libtool
+          pkg-config
+          libao-dev
+          libao-common
+          subversion
+          gawk
+          mawk
+          libpulse-dev
+          libcurl4
+          pulseaudio
+          pulseaudio-utils
+          libsdl2-mixer-2.0-0
+          libsdl2-mixer-dev
+    
     - name: Checkout
       uses: actions/checkout@v3.5.0
       with:
         fetch-depth: 0
 
-    - name: libs
+    - name: compile
       run: |
+        DIST=i686-pc-linux-gnu
+        DST_NAME=sc68
+        DST_GCC=gcc
+        DST_LIBS_DIR=$(pwd)/libs
+        DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
+        DST_LIBS="-lsc68 -lfile68 -lunice68"
         mkdir output
         mkdir libs
         mkdir libs/_compiled
@@ -374,21 +402,6 @@ jobs:
         svn checkout http://svn.code.sf.net/p/sc68/code/ sc68
         cd sc68
         ./tools/svn-bootstrap.sh
-
-    - name: Setup Alpine Linux v3.15 for x86-32
-      uses: jirutka/setup-alpine@v1
-      with:
-        arch: x86
-        branch: v3.15
-
-    - name: compile
-      run: |
-        DIST=i686-pc-linux-gnu
-        DST_NAME=sc68
-        DST_GCC=gcc
-        DST_LIBS_DIR=$(pwd)/libs
-        DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
-        DST_LIBS="-lsc68 -lfile68 -lunice68"
         mkdir libs/_compiled/$DIST
         cd libs/sc68-svn/_build
         mkdir $DIST
@@ -426,6 +439,6 @@ jobs:
         server: ftp.b3dgs.com
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASS }}
-        local_dir: output/
+        local_dir: ${{ steps.alpine-aarch64.outputs.root-path }}/output/
         server_dir: /
         secure: false
