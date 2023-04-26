@@ -22,6 +22,8 @@
 
 #include "sc68_player.h"
 
+__asm__(".symver realpath,realpath@GLIBC_2.6");
+
 #define SAMPLE_RATE 48000
 #define CHANNELS 2
 #define FRAMES 256
