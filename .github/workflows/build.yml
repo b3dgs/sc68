@@ -14,7 +14,7 @@ jobs:
     - name: Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install build-essential alsa-tools libasound2-dev alsa-utils alsa-oss pavucontrol autoconf automake libtool pkg-config libao-dev libao-common android-tools-adb android-tools-fastboot subversion mingw-w64 gawk mawk libpulse-dev libcurl4 pulseaudio pulseaudio-utils cmake gcc-multilib g++-multilib musl musl-tools libsdl2-mixer-2.0-0 libsdl2-mixer-dev
+        sudo apt-get install build-essential alsa-tools libasound2-dev alsa-utils alsa-oss pavucontrol autoconf automake libtool pkg-config libao-dev libao-common android-tools-adb android-tools-fastboot subversion mingw-w64 gawk mawk libpulse-dev libcurl4 pulseaudio pulseaudio-utils cmake gcc-multilib g++-multilib musl musl-dev musl-tools libsdl2-mixer-2.0-0 libsdl2-mixer-dev
 
     - name: Checkout
       uses: actions/checkout@v3.5.0
@@ -41,9 +41,10 @@ jobs:
         mkdir _build
         git clone https://github.com/croissanne/portaudio_opensles.git
         cd ..
+        git clone https://github.com/wheybags/glibc_version_header.git
         git clone https://github.com/madler/zlib.git
         cd sc68-svn
-        svn checkout http://svn.code.sf.net/p/sc68/code/ sc68
+        svn export http://svn.code.sf.net/p/sc68/code/ sc68
         cd sc68
         ./tools/svn-bootstrap.sh
 
@@ -51,7 +52,7 @@ jobs:
       run: |
         DIST=x86_64-pc-linux-gnu
         DST_NAME=sc68
-        DST_GCC=gcc
+        DST_GCC=musl-gcc
         DST_LIBS_DIR=$(pwd)/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
         DST_LIBS="-lsc68 -lfile68 -lunice68"
@@ -61,11 +62,11 @@ jobs:
         cd $DIST
         mkdir as68
         cd as68
-        ../../../sc68/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC --with-glibc-version=2.6
+        ../../../sc68/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
         make
         make install
         cd ..
-        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC --with-glibc-version=2.6
+        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
         make
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
@@ -73,15 +74,15 @@ jobs:
         cd ../../..
         mkdir portaudio/_build/$DIST
         cd portaudio/_build/$DIST
-        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared CFLAGS=-fPIC --with-glibc-version=2.6
+        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared CFLAGS=-fPIC
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
         cd ../../../..
         mkdir bin
         mkdir bin/$DIST
         cd bin/$DIST
-        $DST_GCC -std=c99 $DST_INCLUDES -O3 -c -fPIC ../../$DST_NAME"_player.c"
-        $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME"_player.o" -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
+        $DST_GCC -std=c99 $DST_INCLUDES -include $DST_LIBS_DIR/glibc_version_header/version_headers/x64/force_link_glibc_2.5.h -Os -c -fPIC ../../$DST_NAME"_player.c"
+        $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME"_player.o" -static-libgcc -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
         cd ../..
         mkdir output/linux-x86-64
         cp bin/$DIST/libsc68.so output/linux-x86-64/
@@ -292,7 +293,7 @@ jobs:
         mkdir _build
         git clone https://github.com/croissanne/portaudio_opensles.git
         cd ../sc68-svn
-        svn checkout http://svn.code.sf.net/p/sc68/code/ sc68
+        svn export http://svn.code.sf.net/p/sc68/code/ sc68
         cd sc68
         ./tools/svn-bootstrap.sh
 
@@ -405,7 +406,7 @@ jobs:
         mkdir _build
         git clone https://github.com/croissanne/portaudio_opensles.git
         cd ../sc68-svn
-        svn checkout http://svn.code.sf.net/p/sc68/code/ sc68
+        svn export http://svn.code.sf.net/p/sc68/code/ sc68
         cd sc68
         ./tools/svn-bootstrap.sh
         cd ../../..
