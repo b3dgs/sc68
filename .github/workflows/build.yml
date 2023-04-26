@@ -52,7 +52,7 @@ jobs:
       run: |
         DIST=x86_64-pc-linux-gnu
         DST_NAME=sc68
-        DST_GCC=musl-gcc
+        DST_GCC=gcc
         DST_LIBS_DIR=$(pwd)/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
         DST_LIBS="-lsc68 -lfile68 -lunice68"
