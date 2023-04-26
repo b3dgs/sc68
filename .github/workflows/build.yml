@@ -82,7 +82,7 @@ jobs:
         mkdir bin/$DIST
         cd bin/$DIST
         $DST_GCC -std=c99 $DST_INCLUDES -Os -c -fPIC -include $DST_LIBS_DIR/glibc_version_header/version_headers/x64/force_link_glibc_2.13.h ../../$DST_NAME"_player.c"
-        $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME"_player.o" -static-libgcc -static-libstdc++ -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
+        $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME"_player.o" -static-libgcc -static-libstdc++ -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound -lrt
         cd ../..
         mkdir output/linux-x86-64
         cp bin/$DIST/libsc68.so output/linux-x86-64/
