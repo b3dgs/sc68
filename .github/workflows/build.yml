@@ -62,11 +62,11 @@ jobs:
         cd $DIST
         mkdir as68
         cd as68
-        ../../../sc68/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        ../../../sc68/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS="-fPIC -include $DST_LIBS_DIR/glibc_version_header/version_headers/x64/force_link_glibc_2.5.h"
         make
         make install
         cd ..
-        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS="-fPIC -include $DST_LIBS_DIR/glibc_version_header/version_headers/x64/force_link_glibc_2.5.h"
         make
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
@@ -74,14 +74,14 @@ jobs:
         cd ../../..
         mkdir portaudio/_build/$DIST
         cd portaudio/_build/$DIST
-        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared CFLAGS=-fPIC
+        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared CFLAGS="-fPIC -include $DST_LIBS_DIR/glibc_version_header/version_headers/x64/force_link_glibc_2.5.h"
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
         cd ../../../..
         mkdir bin
         mkdir bin/$DIST
         cd bin/$DIST
-        $DST_GCC -std=c99 $DST_INCLUDES -include $DST_LIBS_DIR/glibc_version_header/version_headers/x64/force_link_glibc_2.5.h -Os -c -fPIC ../../$DST_NAME"_player.c"
+        $DST_GCC -std=c99 $DST_INCLUDES -Os -c -fPIC -include $DST_LIBS_DIR/glibc_version_header/version_headers/x64/force_link_glibc_2.5.h ../../$DST_NAME"_player.c"
         $DST_GCC -s -L$DST_LIBS_DIR/_compiled/$DIST -shared -o lib$DST_NAME.so $DST_NAME"_player.o" -static-libgcc -Wl,-Bstatic $DST_LIBS -lportaudio -Wl,-Bdynamic -pthread -lm -lz -lasound
         cd ../..
         mkdir output/linux-x86-64
