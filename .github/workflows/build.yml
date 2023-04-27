@@ -269,13 +269,11 @@ jobs:
         secure: false
 
   macos:
-    runs-on: macos-latest
+    runs-on: macOS-11
 
     steps:
     - name: Checkout
       uses: actions/checkout@v3.5.0
-      with:
-        fetch-depth: 0
 
     - name: Dependencies
       run: |
@@ -441,13 +439,12 @@ jobs:
         cp bin/$DIST/libsc68.so output/linux-x86/
       shell: alpine.sh --root {0}
 
-# Skip as library depends on musl
-#    - name: Deploy
-#      uses: dennisameling/ftp-upload-action@v1.0.10
-#      with:
-#        server: ftp.b3dgs.com
-#        username: ${{ secrets.FTP_USER }}
-#        password: ${{ secrets.FTP_PASS }}
-#        local_dir: ${{ steps.alpine-target.outputs.root-path }}/home/runner/work/sc68/sc68/sc68/output/
-#        server_dir: /
-#        secure: false
+    - name: Deploy
+      uses: dennisameling/ftp-upload-action@v1.0.10
+      with:
+        server: ftp.b3dgs.com
+        username: ${{ secrets.FTP_USER }}
+        password: ${{ secrets.FTP_PASS }}
+        local_dir: ${{ steps.alpine-target.outputs.root-path }}/home/runner/work/sc68/sc68/sc68/output/
+        server_dir: /
+        secure: false
