@@ -74,7 +74,7 @@ jobs:
         cd ../../..
         mkdir portaudio/_build/$DIST
         cd portaudio/_build/$DIST
-        ../../portaudio_opensles/configure --host=$DIST --enable-static --without-oss --disable-shared CFLAGS="-fPIC -include $DST_LIBS_DIR/glibc_version_header/version_headers/x64/force_link_glibc_2.6.h"
+        ../../portaudio_opensles/configure --host=$DIST --enable-static --with-alsa --without-jack --without-oss --disable-shared CFLAGS="-fPIC -include $DST_LIBS_DIR/glibc_version_header/version_headers/x64/force_link_glibc_2.6.h"
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
         cd ../../../..
@@ -321,7 +321,7 @@ jobs:
         cd ../../..
         mkdir portaudio/_build/$DIST
         cd portaudio/_build/$DIST
-        ../../portaudio_opensles/configure --enable-static --disable-shared --disable-mac-universal CC=clang CFLAGS=-fPIC
+        ../../portaudio_opensles/configure --enable-static --disable-shared --without-jack --disable-mac-universal CC=clang CFLAGS=-fPIC
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
         cd ../../../..
@@ -426,7 +426,7 @@ jobs:
         cd ../../..
         mkdir portaudio/_build/$DIST
         cd portaudio/_build/$DIST
-        ../../portaudio_opensles/configure --enable-static --disable-shared --without-oss CFLAGS="-fPIC"
+        ../../portaudio_opensles/configure --enable-static --disable-shared --with-alsa --without-jack --without-oss CFLAGS="-fPIC"
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
         cd ../../../..
