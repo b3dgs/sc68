@@ -374,9 +374,9 @@ jobs:
 
     - name: macos-aarch64
       run: |
-        DIST=aarch64-apple-darwin
+        DIST=arm64-apple-darwin
         DST_NAME=sc68
-        DST_GCC=aarch64-apple-darwin-clang
+        DST_GCC=arm64-apple-darwin-clang
         DST_LIBS_DIR=$(pwd)/libs
         DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
         DST_LIBS="-lsc68 -lfile68 -lunice68"
