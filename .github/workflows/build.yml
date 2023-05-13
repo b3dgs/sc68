@@ -345,6 +345,83 @@ jobs:
         server_dir: /
         secure: false
 
+  macos-aarch64:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3.5.0
+
+    - name: Dependencies
+      run: |
+        brew install autoconf automake gawk mawk
+
+    - name: libs
+      run: |
+        mkdir output
+        mkdir libs
+        mkdir libs/_compiled
+        mkdir libs/sc68-svn
+        mkdir libs/sc68-svn/_build
+        mkdir libs/portaudio
+        cd libs/portaudio
+        mkdir _build
+        git clone https://github.com/croissanne/portaudio_opensles.git
+        cd ../sc68-svn
+        svn export http://svn.code.sf.net/p/sc68/code/ sc68
+        cd sc68
+        ./tools/svn-bootstrap.sh
+
+    - name: macos-aarch64
+      run: |
+        DIST=arm64-apple-darwin20.1.0
+        DST_NAME=sc68
+        DST_GCC=clang
+        DST_LIBS_DIR=$(pwd)/libs
+        DST_INCLUDES="-I$DST_LIBS_DIR/portaudio/portaudio_opensles/include -I$DST_LIBS_DIR/sc68-svn/sc68/file68 -I$DST_LIBS_DIR/sc68-svn/sc68/libsc68"
+        DST_LIBS="-lsc68 -lfile68 -lunice68"
+        mkdir libs/_compiled/$DIST
+        cd libs/sc68-svn/_build
+        mkdir $DIST
+        cd $DIST
+        mkdir as68
+        cd as68
+        ../../../sc68/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CFLAGS=-fPIC
+        make
+        make install
+        cd ..
+        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared --disable-mac-universal CC=clang CFLAGS=-fPIC
+        make
+        cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
+        cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
+        cp unice68/.libs/libunice68.a ../../../_compiled/$DIST/
+        cd ../../..
+        mkdir portaudio/_build/$DIST
+        cd portaudio/_build/$DIST
+        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared --without-jack --disable-mac-universal CC=clang CFLAGS=-fPIC
+        make
+        cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
+        cd ../../../..
+        mkdir bin
+        mkdir bin/$DIST
+        cd bin/$DIST
+        $DST_GCC -std=c99 $DST_INCLUDES -O2 -c -fPIC ../../$DST_NAME"_player.c" -target $DIST
+        $DST_GCC -dynamiclib -framework CoreAudio -framework AudioToolbox -framework AudioUnit -framework CoreFoundation -framework CoreServices -L$DST_LIBS_DIR/_compiled/$DIST -o lib$DST_NAME.dylib $DST_NAME"_player.o" -lcurl $DST_LIBS -lportaudio -pthread -lm -lz
+        cd ../..
+        mkdir output/darwin-aarch64
+        ls bin/$DIST/
+        cp bin/$DIST/libsc68.dylib output/darwin-aarch64/
+
+    - name: Deploy
+      uses: dennisameling/ftp-upload-action@v1.0.10
+      with:
+        server: ftp.b3dgs.com
+        username: ${{ secrets.FTP_USER }}
+        password: ${{ secrets.FTP_PASS }}
+        local_dir: output/
+        server_dir: /
+        secure: false
+
   linux-x86-32:
     runs-on: ubuntu-latest
 
