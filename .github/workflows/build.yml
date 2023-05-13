@@ -386,11 +386,11 @@ jobs:
         cd $DIST
         mkdir as68
         cd as68
-        ../../../sc68/as68/configure --host=$DIST --target=$DIST --build=$DIST --without-ao --enable-static --disable-shared CC=$DST_GCC CFLAGS="-fPIC -target arm64-apple-macos11"
+        ../../../sc68/as68/configure --host=$DIST --without-ao --enable-static --disable-shared CC=$DST_GCC CFLAGS="-fPIC -target arm64-apple-macos11"
         make
         make install
         cd ..
-        ../../sc68/configure --host=$DIST --target=$DIST --build=$DIST --without-ao --enable-static --disable-shared --disable-mac-universal CC=$DST_GCC CFLAGS="-fPIC -target arm64-apple-macos11"
+        ../../sc68/configure --host=$DIST --without-ao --enable-static --disable-shared --disable-mac-universal CC=$DST_GCC CFLAGS="-fPIC -target arm64-apple-macos11"
         make
         cp libsc68/.libs/libsc68.a ../../../_compiled/$DIST/
         cp file68/.libs/libfile68.a ../../../_compiled/$DIST/
@@ -398,7 +398,7 @@ jobs:
         cd ../../..
         mkdir portaudio/_build/$DIST
         cd portaudio/_build/$DIST
-        ../../portaudio_opensles/configure --host=$DIST --target=$DIST --build=$DIST --enable-static --disable-shared --without-jack --disable-mac-universal CC=$DST_GCC CFLAGS="-fPIC -target arm64-apple-macos11"
+        ../../portaudio_opensles/configure --host=$DIST --enable-static --disable-shared --without-jack --disable-mac-universal CC=$DST_GCC CFLAGS="-fPIC -target arm64-apple-macos11"
         make
         cp lib/.libs/libportaudio.a ../../../_compiled/$DIST/
         cd ../../../..
