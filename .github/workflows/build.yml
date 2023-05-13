@@ -346,7 +346,7 @@ jobs:
         secure: false
 
   macos-aarch64:
-    runs-on: macos-latest
+    runs-on: macOS-11
 
     steps:
     - name: Checkout
@@ -374,7 +374,7 @@ jobs:
 
     - name: macos-aarch64
       run: |
-        DIST=arm64-apple-darwin
+        DIST=aarch64-apple-darwin
         DST_NAME=sc68
         DST_GCC=clang
         DST_LIBS_DIR=$(pwd)/libs
